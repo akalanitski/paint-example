@@ -11,6 +11,7 @@ import app.appMvc.model.color.ColorBackProxy;
 import app.appMvc.model.color.ColorFrontProxy;
 import app.appMvc.view.CanvasMediator;
 import app.appMvc.view.StageMediator;
+import app.appMvc.view.toolbar.ToolbarMediator;
 
 import flash.display.Stage;
 
@@ -32,6 +33,7 @@ public class StartupCommand extends SimpleCommand{
         // insert registerMediator()s here
         facade.registerMediator(new StageMediator(stage));
         facade.registerMediator(new CanvasMediator());
+        facade.registerMediator(new ToolbarMediator(stage));
 
         // insert post actions here
         // ...
