@@ -21,7 +21,7 @@ public class ToolSquare extends Tool {
     private const StateNone:String = "none";
     private const StateClicked:String = "clicked";
     private var _state:String;
-    private function set state(newState:String) {
+    private function set state(newState:String):void {
         _state = newState;
     }
 

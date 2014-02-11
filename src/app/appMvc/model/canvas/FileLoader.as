@@ -33,7 +33,7 @@ public class FileLoader {
         file.addEventListener(Event.COMPLETE, handleComplete);
         file.browse();
     }
-    function handleProgress(e:ProgressEvent):void { // progress event
+    private function handleProgress(e:ProgressEvent):void { // progress event
         trace("progressHandler: loaded="+e.bytesLoaded+" total="+e.bytesTotal);
     }
     private function handleSelect(e:Event):void{
@@ -47,7 +47,7 @@ public class FileLoader {
         loader.loadBytes(file.data);
     }
 
-    function handleInit(e:Event):void {
+    private function handleInit(e:Event):void {
         var bm:Bitmap = e.currentTarget.loader.content as Bitmap;
         _sprite.graphics.beginBitmapFill(bm.bitmapData);
         _sprite.graphics.lineStyle();

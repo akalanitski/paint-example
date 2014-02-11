@@ -6,13 +6,12 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.view {
-import appMvc.Notes;
-import appMvc.model.canvas.CanvasProxy;
-import appMvc.model.color.ColorFrontProxy;
-import appMvc.view.components.ToolColor;
+import app.appMvc.Notes;
+import app.appMvc.model.canvas.CanvasProxy;
+import app.appMvc.model.color.ColorFrontProxy;
+import app.appMvc.view.components.ToolColor;
 
 import org.puremvc.as3.interfaces.INotification;
-
 import org.puremvc.as3.patterns.mediator.Mediator;
 
 public class ToolColorMediator extends Mediator{

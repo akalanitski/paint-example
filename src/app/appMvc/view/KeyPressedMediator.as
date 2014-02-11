@@ -6,12 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.view {
-import appMvc.Notes;
+import app.appMvc.Notes;
 
 import flash.events.KeyboardEvent;
 
 import org.puremvc.as3.interfaces.INotification;
-
 import org.puremvc.as3.patterns.mediator.Mediator;
 
 public class KeyPressedMediator extends Mediator{
