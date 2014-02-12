@@ -5,7 +5,7 @@
  * Time: 16:33
  * To change this template use File | Settings | File Templates.
  */
-package app.appMvc.view {
+package app.appMvc.view.components {
 import app.appMvc.Notes;
 import app.appMvc.model.canvas.CanvasProxy;
 import app.appMvc.model.color.ColorFrontProxy;
