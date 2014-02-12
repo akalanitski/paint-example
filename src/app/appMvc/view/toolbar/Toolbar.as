@@ -9,30 +9,36 @@ import flash.events.MouseEvent;
 import flash.text.TextField;
 
 public class Toolbar extends Sprite {
-    public static const CLICKED_BUTTON_1:String = "clickedButton1";
-    public static const CLICKED_BUTTON_2:String = "clickedButton2";
-    public static const CLICKED_BUTTON_3:String = "clickedButton3";
-    private var button1:Sprite;
-    private var button2:Sprite;
-    private var button3:Sprite;
+//    public static const CLICKED_BUTTON_1:String = "clickedButton1";
+//    public static const CLICKED_BUTTON_2:String = "clickedButton2";
+//    public static const CLICKED_BUTTON_3:String = "clickedButton3";
+    public static const CLICKED_BUTTON:String = "Clicked_Button";
+    public var button_1:Sprite;
+    public var button_2:Sprite;
+    public var button_3:Sprite;
+    public var button_clear:Sprite;
 
     public function Toolbar(stage:Stage) {
         graphics.beginFill(0x444444);
         graphics.drawRect(0, 0, 300, 30);
         graphics.endFill();
 
-        // button1
-        button1 = newButton(5, 5, 40, 20, "first");
-        addChild(button1);
-        button1.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
-        // button2
-        button2 = newButton(50, 5, 40, 20, "second");
-        addChild(button2);
-        button2.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
-        // button3
-        button3 = newButton(95, 5, 40, 20, "third");
-        addChild(button3);
-        button3.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        // button_1
+        button_1 = newButton(5, 5, 40, 20, "Pencil");
+        addChild(button_1);
+        button_1.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        // button_2
+        button_2 = newButton(50, 5, 40, 20, "Brush");
+        addChild(button_2);
+        button_2.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        // button_3
+        button_3 = newButton(95, 5, 40, 20, "Square");
+        addChild(button_3);
+        button_3.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        // button_clear
+        button_clear = newButton(140, 5, 40, 20, "Clear");
+        addChild(button_clear);
+        button_clear.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
 
         stage.addChild(this);
     }
@@ -73,16 +79,20 @@ public class Toolbar extends Sprite {
 
     private function handleClick(e:MouseEvent):void {
         switch (e.currentTarget as Sprite) {
-            case button1:
-                button1.dispatchEvent(new Event(CLICKED_BUTTON_1, true));
+            case button_1:
+                button_1.dispatchEvent(new Event(CLICKED_BUTTON, true));
                 break;
 
-            case button2:
-                button2.dispatchEvent(new Event(CLICKED_BUTTON_2, true));
+            case button_2:
+                button_2.dispatchEvent(new Event(CLICKED_BUTTON, true));
                 break;
 
-            case button3:
-                button3.dispatchEvent(new Event(CLICKED_BUTTON_3, true));
+            case button_3:
+                button_3.dispatchEvent(new Event(CLICKED_BUTTON, true));
+                break;
+
+            case button_clear:
+                button_clear.dispatchEvent(new Event(CLICKED_BUTTON,true));
                 break;
 
             default:

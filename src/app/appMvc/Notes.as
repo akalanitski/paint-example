@@ -15,5 +15,6 @@ public class Notes {
     public static const KEY_UP:String = "key_up";
     public static const ADD_CHILD:String = "addChild";
     public static const REMOVE_CHILD:String = "removeChild";
+    public static const SET_TOOL_COMMAND:String = "setToolCommand";
 }
 }
