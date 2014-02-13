@@ -43,6 +43,9 @@ public class Toolbar extends Sprite {
         stage.addChild(this);
     }
 
+    public function toggleVisibility(){
+        visible = !visible;
+    }
     // should be called for proper garbage collection
     public function onRemove():void {
         // removeChildren
