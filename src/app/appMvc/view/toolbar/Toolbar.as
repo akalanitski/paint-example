@@ -17,28 +17,44 @@ public class Toolbar extends Sprite {
     public var button_2:Sprite;
     public var button_3:Sprite;
     public var button_clear:Sprite;
+    public var button_hand:Sprite;
 
     public function Toolbar(stage:Stage) {
         graphics.beginFill(0x444444);
         graphics.drawRect(0, 0, 300, 30);
         graphics.endFill();
 
+        var xPosition:int = 5;
+        const xGap:int = 5;
         // button_1
-        button_1 = newButton(5, 5, 40, 20, "Pencil");
+        button_1 = newButton(xPosition, 5, 40, 20, "Pencil");
         addChild(button_1);
         button_1.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        xPosition += button_1.width + xGap;
+
         // button_2
-        button_2 = newButton(50, 5, 40, 20, "Brush");
+        button_2 = newButton(xPosition, 5, 40, 20, "Brush");
         addChild(button_2);
         button_2.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        xPosition += button_2.width + xGap;
+
         // button_3
-        button_3 = newButton(95, 5, 40, 20, "Square");
+        button_3 = newButton(xPosition, 5, 40, 20, "Square");
         addChild(button_3);
         button_3.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        xPosition += button_3.width + xGap;
+
         // button_clear
-        button_clear = newButton(140, 5, 40, 20, "Clear");
+        button_clear = newButton(xPosition, 5, 40, 20, "Clear");
         addChild(button_clear);
         button_clear.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        xPosition += button_clear.width + xGap;
+
+        // button_clear
+        button_hand = newButton(xPosition, 5, 40, 20, "Hand");
+        addChild(button_hand);
+        button_hand.addEventListener(MouseEvent.CLICK, handleClick, false, 0, true);
+        xPosition += button_hand.width + xGap;
 
         stage.addChild(this);
     }

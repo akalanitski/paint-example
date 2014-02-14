@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.canvas {
-import app.appMvc.model.color.ColorVO;
+import app.appMvc.model.color.ApplicationSettings;
 import app.appMvc.model.tool.Tool;
 import app.appMvc.model.tool.ToolPencil;
 import app.appMvc.model.tool.ToolSquare;
@@ -15,21 +15,29 @@ import app.appMvc.model.tool.ToolStencilBrush;
 import flash.display.Sprite;
 import flash.display.Stage;
 import flash.events.MouseEvent;
+import flash.geom.Rectangle;
 
 public class CanvasVO{
 
     private var _currentTool:Tool;
-    private var _frontColor:ColorVO = new ColorVO(0x000000,1.);
-    private var _backColor:ColorVO = new ColorVO(0xFFFFFF,1.);
+    private var _frontColor:ApplicationSettings = new ApplicationSettings(0x000000,1.);
+    private var _backColor:ApplicationSettings = new ApplicationSettings(0xFFFFFF,1.);
     private var _layer:Sprite = new Sprite();
     private var blockToolChange:Boolean = false;
     private var _fileLoader:FileLoader;
     public function get fileLoader():FileLoader{return _fileLoader;}
 
     public function CanvasVO(stage:Stage) {
+
+        _layer.graphics.lineStyle(1, 0);
+        _layer.graphics.endFill();
+        _layer.graphics.drawRect(0, 0, 550 - 1, 400 - 1);
+
+        _layer.scrollRect = new Rectangle(0, 0, 550, 400);
+
         stage.addChild(_layer);
         _currentTool = new ToolPencil(_layer.graphics);
-        _fileLoader= new FileLoader(_layer);
+        _fileLoader = new FileLoader(_layer);
     }
     public function addListeners():void{
         _layer.stage.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
@@ -70,6 +78,7 @@ public class CanvasVO{
                     break;
             }
     }
+
     public function handleMouseUp(e:MouseEvent):void{
         blockToolChange = false;
         _currentTool.handleMouseUp(e);
@@ -77,7 +86,7 @@ public class CanvasVO{
     }
 
     public function swapFrontBackColors():void{
-        var frontColorBuffer:ColorVO = new ColorVO(_frontColor.rgb,_frontColor.alpha);
+        var frontColorBuffer:ApplicationSettings = new ApplicationSettings(_frontColor.frontColor,_frontColor.frontAlpha);
         _frontColor.setColor(_backColor);
         _backColor.setColor(frontColorBuffer);
     }
