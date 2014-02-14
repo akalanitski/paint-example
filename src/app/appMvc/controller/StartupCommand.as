@@ -8,8 +8,6 @@
 package app.appMvc.controller {
 import app.appMvc.Notes;
 import app.appMvc.model.canvas.CanvasProxy;
-import app.appMvc.model.color.ColorBackProxy;
-import app.appMvc.model.color.ColorFrontProxy;
 import app.appMvc.view.CanvasMediator;
 import app.appMvc.view.StageMediator;
 import app.appMvc.view.toolbar.ToolbarMediator;
@@ -28,8 +26,6 @@ public class StartupCommand extends SimpleCommand {
 
         // insert registerProxy()s here
         facade.registerProxy(new CanvasProxy(stage));
-        facade.registerProxy(new ColorFrontProxy());
-        facade.registerProxy(new ColorBackProxy());
 
         // insert registerMediator()s here
         facade.registerMediator(new StageMediator(stage));

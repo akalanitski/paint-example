@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.tool {
-import app.appMvc.model.color.ColorVO;
+import app.appMvc.model.color.ApplicationSettings;
 
 import flash.display.Graphics;
 import flash.events.MouseEvent;
@@ -22,8 +22,8 @@ public class ToolStencilBrush extends Tool {
         super(graphics);
     }
 
-    private function useTool(e:MouseEvent, color:ColorVO):void {
-        _graphics.beginFill(color.rgb, color.alpha);
+    private function useTool(e:MouseEvent, color:ApplicationSettings):void {
+        _graphics.beginFill(color.frontColor, color.frontAlpha);
         _graphics.lineStyle();
         _graphics.drawCircle(e.stageX, e.stageY, 5);
         _graphics.endFill();
@@ -41,7 +41,7 @@ public class ToolStencilBrush extends Tool {
 
     override public function handleMouseMove(e:MouseEvent):void {
         if (isDrawing) {
-            useTool(e, new ColorVO());
+            useTool(e, new ApplicationSettings());
         }
     }
 }
