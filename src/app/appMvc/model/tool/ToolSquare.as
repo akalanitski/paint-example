@@ -8,15 +8,9 @@ import flash.events.MouseEvent;
 
 public class ToolSquare extends Tool {
     public static const NAME:String = "ToolSquare";
-
-    override public function getName():String {
-        return NAME;
+    public function ToolSquare() {
+        super(NAME);
     }
-
-    public function ToolSquare(graphics:Graphics) {
-        super(graphics);
-    }
-
 
     private const StateNone:String = "none";
     private const StateClicked:String = "clicked";
@@ -25,19 +19,18 @@ public class ToolSquare extends Tool {
         _state = newState;
     }
 
-    private var isDrawing:Boolean = false;
     override public function handleMouseDown(e:MouseEvent):void {
         trace("SquareDown");
-        isDrawing = true;
+        _isInUse = true;
     }
 
     override public function handleMouseUp(e:MouseEvent) :void{
         trace("SquareUp");
-        isDrawing = false;
+        _isInUse = false;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (isDrawing){
+        if (_isInUse){
             trace("SquareMove");
         }
     }

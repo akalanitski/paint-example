@@ -8,8 +8,8 @@
 package app.appMvc.controller {
 import app.appMvc.Notes;
 import app.appMvc.model.appManager.AppManagerProxy;
-import app.appMvc.model.color.ApplicationSettingsProxy;
-import app.appMvc.view.AppManagerMediator;
+import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.appManager.AppManagerMediator;
 import app.appMvc.view.StageMediator;
 import app.appMvc.view.toolbar.ToolbarMediator;
 

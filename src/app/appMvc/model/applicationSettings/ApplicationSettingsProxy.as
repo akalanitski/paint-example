@@ -5,12 +5,16 @@
  * Time: 11:25
  * To change this template use File | Settings | File Templates.
  */
-package app.appMvc.model.color {
+package app.appMvc.model.applicationSettings {
 import org.puremvc.as3.patterns.proxy.Proxy;
 
-public class ApplicationSettingsProxy extends Proxy{
+public class ApplicationSettingsProxy extends Proxy {
     public static const NAME:String = "ApplicationSettingsProxy";
-    public function get settings():ApplicationSettingsVO{return data as ApplicationSettingsVO;}
+
+    public function get settings():ApplicationSettingsVO {
+        return data as ApplicationSettingsVO;
+    }
+
     public function ApplicationSettingsProxy() {
         super(NAME, new ApplicationSettingsVO());
     }

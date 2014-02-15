@@ -6,6 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.appManager {
+import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.tool.ToolProxy;
+
 import flash.display.Stage;
 
 import org.puremvc.as3.patterns.proxy.Proxy;
@@ -22,6 +25,8 @@ public class AppManagerProxy extends Proxy {
     }
 
     override public function onRegister():void {
+        facade.registerProxy(new ApplicationSettingsProxy());
+        facade.registerProxy(new ToolProxy());
         appManager.addListeners();
     }
 

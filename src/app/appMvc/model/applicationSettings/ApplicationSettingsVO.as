@@ -5,7 +5,7 @@
  * Time: 16:05
  * To change this template use File | Settings | File Templates.
  */
-package app.appMvc.model.color {
+package app.appMvc.model.applicationSettings {
 public class ApplicationSettingsVO {
     public function ApplicationSettingsVO() {
     }

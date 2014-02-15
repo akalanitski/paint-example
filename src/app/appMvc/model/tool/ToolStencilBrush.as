@@ -11,35 +11,27 @@ import flash.events.MouseEvent;
 
 public class ToolStencilBrush extends Tool {
     public static const NAME:String = "ToolStencilBrush";
-
-    override public function getName():String {
-        return NAME;
+    public function ToolStencilBrush() {
+        super(NAME);
     }
-
-    public function ToolStencilBrush(graphics:Graphics) {
-        super(graphics);
-    }
-
-    private function useTool(e:MouseEvent):void {
-        _graphics.beginFill(0x000000, 1.0);
-        _graphics.lineStyle();
-        _graphics.drawCircle(e.stageX, e.stageY, 5);
-        _graphics.endFill();
-    }
-
-    public var isDrawing:Boolean = false;
 
     override public function handleMouseDown(e:MouseEvent):void {
-        isDrawing = true;
+        _isInUse = true;
     }
 
     override public function handleMouseUp(e:MouseEvent):void {
-        isDrawing = false;
+        _isInUse = false;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (isDrawing) {
+        if (_isInUse) {
             useTool(e);
+        }
+        function useTool(e:MouseEvent):void {
+//            _graphics.beginFill(0x000000, 1.0);
+//            _graphics.lineStyle();
+//            _graphics.drawCircle(e.stageX, e.stageY, 5);
+//            _graphics.endFill();
         }
     }
 }

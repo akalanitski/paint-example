@@ -35,7 +35,7 @@ public class AppManagerVO {
         _layer.scrollRect = new Rectangle(0, 0, 550, 400);
 
         stage.addChild(_layer);
-        _currentTool = new ToolPencil(_layer.graphics);
+        _currentTool = new ToolPencil();
         _fileLoader = new FileLoader(_layer);
     }
 
@@ -52,7 +52,6 @@ public class AppManagerVO {
     }
 
     public function handleMouseMove(e:MouseEvent):void {
-
         _currentTool.handleMouseMove(e);
     }
 
@@ -67,15 +66,15 @@ public class AppManagerVO {
         if (toolName != _currentTool.getName() && !blockToolChange)
             switch (toolName) {
                 case ToolPencil.NAME:
-                    _currentTool = new ToolPencil(_layer.graphics);
+                    _currentTool = new ToolPencil();
                     trace(_currentTool.getName());
                     break;
                 case ToolStencilBrush.NAME:
-                    _currentTool = new ToolStencilBrush(_layer.graphics);
+                    _currentTool = new ToolStencilBrush();
                     trace(_currentTool.getName());
                     break;
                 case ToolSquare.NAME:
-                    _currentTool = new ToolSquare(_layer.graphics);
+                    _currentTool = new ToolSquare();
                     break;
             }
     }

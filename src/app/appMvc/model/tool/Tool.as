@@ -13,13 +13,20 @@ import flash.events.MouseEvent;
  * */
 public class Tool {
     public static const NAME:String = "Tool";
-    protected var _graphics:Graphics;
-    function Tool(graphics:Graphics){
-        _graphics = graphics;
+    protected var _isInUse:Boolean = false;
+    protected var _toolName:String;
+    function Tool(concreteToolName:String){
+        if (concreteToolName){
+            _toolName = concreteToolName;
+        }
+        else{
+            _toolName = NAME;
+        }
     }
 
-    // should be overridden to get proper NAME
-    public function getName():String{return NAME;}
+    public function getName():String{
+        return _toolName;
+    }
 
     public function handleMouseDown(e:MouseEvent):void{}
     public function handleMouseUp(e:MouseEvent):void{}

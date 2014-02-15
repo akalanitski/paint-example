@@ -11,48 +11,40 @@ import flash.events.MouseEvent;
 
 public class ToolPencil extends Tool {
     public static const NAME:String = "ToolPencil";
-
     override public function getName():String {
         return NAME;
     }
 
-    public function ToolPencil(graphics:Graphics) {
-        super(graphics);
+    public function ToolPencil() {
+        super(NAME);
     }
 
     private var _prevX:Number;
     private var _prevY:Number;
-
-    private function initTool(e:MouseEvent):void {
+    override public function handleMouseDown(e:MouseEvent):void {
+        _isInUse = true;
         _prevX = e.stageX;
         _prevY = e.stageY;
-    }
-
-    private var isDrawing:Boolean;
-
-    override public function handleMouseDown(e:MouseEvent):void {
-        isDrawing = true;
-        initTool(e);
     }
 
     override public function handleMouseUp(e:MouseEvent):void {
-        isDrawing = false;
+        _isInUse = false;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (isDrawing) {
+        if (_isInUse) {
             useTool(e);
         }
-    }
 
-    private function useTool(e:MouseEvent):void {
-        _graphics.beginFill(0x000000, 1.0);
-        _graphics.lineStyle(5, 0x000000, 1.0);
-        _graphics.moveTo(_prevX, _prevY);
-        _graphics.lineTo(e.stageX, e.stageY);
-        _prevX = e.stageX;
-        _prevY = e.stageY;
-        _graphics.endFill();
+        function useTool(e:MouseEvent):void {
+//            _graphics.beginFill(0x000000, 1.0);
+//            _graphics.lineStyle(5, 0x000000, 1.0);
+//            _graphics.moveTo(_prevX, _prevY);
+//            _graphics.lineTo(e.stageX, e.stageY);
+//            _prevX = e.stageX;
+//            _prevY = e.stageY;
+//            _graphics.endFill();
+        }
     }
 }
 }
