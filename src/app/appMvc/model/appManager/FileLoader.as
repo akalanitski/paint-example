@@ -5,7 +5,7 @@
  * Time: 15:53
  * To change this template use File | Settings | File Templates.
  */
-package app.appMvc.model.canvas {
+package app.appMvc.model.appManager {
 import com.adobe.images.PNGEncoder;
 
 import flash.display.Bitmap;

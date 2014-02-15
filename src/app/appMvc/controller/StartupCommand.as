@@ -7,9 +7,9 @@
  */
 package app.appMvc.controller {
 import app.appMvc.Notes;
-import app.appMvc.model.canvas.CanvasProxy;
+import app.appMvc.model.appManager.AppManagerProxy;
 import app.appMvc.model.color.ApplicationSettingsProxy;
-import app.appMvc.view.CanvasMediator;
+import app.appMvc.view.AppManagerMediator;
 import app.appMvc.view.StageMediator;
 import app.appMvc.view.toolbar.ToolbarMediator;
 
@@ -27,11 +27,11 @@ public class StartupCommand extends SimpleCommand {
 
         // insert registerProxy()s here
         facade.registerProxy(new ApplicationSettingsProxy());
-        facade.registerProxy(new CanvasProxy(stage));
+        facade.registerProxy(new AppManagerProxy(stage));
 
         // insert registerMediator()s here
         facade.registerMediator(new StageMediator(stage));
-        facade.registerMediator(new CanvasMediator());
+        facade.registerMediator(new AppManagerMediator());
         facade.registerMediator(new ToolbarMediator(stage));
 
         // insert post actions here

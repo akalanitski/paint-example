@@ -7,7 +7,7 @@
  */
 package app.appMvc.view {
 import app.appMvc.Notes;
-import app.appMvc.model.canvas.CanvasProxy;
+import app.appMvc.model.appManager.AppManagerProxy;
 import app.appMvc.model.tool.ToolPencil;
 import app.appMvc.model.tool.ToolSquare;
 import app.appMvc.model.tool.ToolStencilBrush;
@@ -19,15 +19,15 @@ import flash.ui.Keyboard;
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.mediator.Mediator;
 
-public class CanvasMediator extends Mediator{
-    public static const NAME:String = "CanvasMediator";
+public class AppManagerMediator extends Mediator{
+    public static const NAME:String = "AppManagerMediator";
 
-    private var _canvasProxy:CanvasProxy;
+    private var _canvasProxy:AppManagerProxy;
     private var _stage:Stage;
-    public function CanvasMediator() {
+    public function AppManagerMediator() {
         super(NAME);
 
-        _canvasProxy = facade.retrieveProxy(CanvasProxy.NAME) as CanvasProxy;
+        _canvasProxy = facade.retrieveProxy(AppManagerProxy.NAME) as AppManagerProxy;
 
         var stageMediator:StageMediator = facade.retrieveMediator(StageMediator.NAME) as StageMediator;
         _stage = stageMediator.stage;
@@ -44,19 +44,19 @@ public class CanvasMediator extends Mediator{
         var keyEvent:KeyboardEvent = note.getBody()as KeyboardEvent;
         switch(keyEvent.keyCode){
             case Keyboard.NUMBER_1:
-                _canvasProxy.canvas.setTool(ToolStencilBrush.NAME);
+                _canvasProxy.appManager.setTool(ToolStencilBrush.NAME);
                 break;
             case Keyboard.NUMBER_2:
-                _canvasProxy.canvas.setTool(ToolPencil.NAME);
+                _canvasProxy.appManager.setTool(ToolPencil.NAME);
                 break;
             case Keyboard.NUMBER_3:
-                _canvasProxy.canvas.setTool(ToolSquare.NAME);
+                _canvasProxy.appManager.setTool(ToolSquare.NAME);
                 break;
             case Keyboard.S:
-                _canvasProxy.canvas.fileLoader.saveToPng();
+                _canvasProxy.appManager.fileLoader.saveToPng();
                 break;
             case Keyboard.O:
-                _canvasProxy.canvas.fileLoader.loadFile();
+                _canvasProxy.appManager.fileLoader.loadFile();
                 break;
         }
     }

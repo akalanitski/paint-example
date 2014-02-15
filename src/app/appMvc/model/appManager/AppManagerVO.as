@@ -5,7 +5,7 @@
  * Time: 15:50
  * To change this template use File | Settings | File Templates.
  */
-package app.appMvc.model.canvas {
+package app.appMvc.model.appManager {
 import app.appMvc.model.tool.Tool;
 import app.appMvc.model.tool.ToolPencil;
 import app.appMvc.model.tool.ToolSquare;
@@ -16,7 +16,7 @@ import flash.display.Stage;
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 
-public class CanvasVO {
+public class AppManagerVO {
 
     private var _currentTool:Tool;
     private var _layer:Sprite = new Sprite();
@@ -26,7 +26,7 @@ public class CanvasVO {
         return _fileLoader;
     }
 
-    public function CanvasVO(stage:Stage) {
+    public function AppManagerVO(stage:Stage) {
 
         _layer.graphics.lineStyle(1, 0);
         _layer.graphics.endFill();

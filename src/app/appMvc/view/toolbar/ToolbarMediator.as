@@ -3,7 +3,7 @@
  */
 package app.appMvc.view.toolbar {
 import app.appMvc.Notes;
-import app.appMvc.model.canvas.CanvasProxy;
+import app.appMvc.model.appManager.AppManagerProxy;
 
 import flash.display.Stage;
 import flash.events.Event;
@@ -47,14 +47,15 @@ public class ToolbarMediator extends Mediator {
 
     private function handleClickedToolbarButton(e:Event):void {
         switch (e.target) {
-            case toolbar.button_1:
-            case toolbar.button_2:
-            case toolbar.button_3:
+            case toolbar.buttons[0]:
+            case toolbar.buttons[1]:
+            case toolbar.buttons[2]:
+            case toolbar.buttons[3]:
                 sendNotification(Notes.SET_TOOL_COMMAND, e);
                 break;
-            case toolbar.button_clear:
-                var canvasProxy:CanvasProxy = facade.retrieveProxy(CanvasProxy.NAME) as CanvasProxy;
-                canvasProxy.canvas.clearCanvas();
+            case toolbar.buttons[4]:
+                var canvasProxy:AppManagerProxy = facade.retrieveProxy(AppManagerProxy.NAME) as AppManagerProxy;
+                canvasProxy.appManager.clearCanvas();
         }
     }
 
