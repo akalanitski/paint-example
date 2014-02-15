@@ -6,8 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.tool {
-import app.appMvc.model.color.ApplicationSettings;
-
 import flash.display.Graphics;
 import flash.events.MouseEvent;
 
@@ -43,13 +41,13 @@ public class ToolPencil extends Tool {
 
     override public function handleMouseMove(e:MouseEvent):void {
         if (isDrawing) {
-            useTool(e, new ApplicationSettings());
+            useTool(e);
         }
     }
 
-    private function useTool(e:MouseEvent, color:ApplicationSettings):void {
-        _graphics.beginFill(color.frontColor, color.frontAlpha);
-        _graphics.lineStyle(5, color.frontColor, color.frontAlpha);
+    private function useTool(e:MouseEvent):void {
+        _graphics.beginFill(0x000000, 1.0);
+        _graphics.lineStyle(5, 0x000000, 1.0);
         _graphics.moveTo(_prevX, _prevY);
         _graphics.lineTo(e.stageX, e.stageY);
         _prevX = e.stageX;

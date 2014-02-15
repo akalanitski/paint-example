@@ -9,11 +9,10 @@ package app.appMvc.model.color {
 import org.puremvc.as3.patterns.proxy.Proxy;
 
 public class ApplicationSettingsProxy extends Proxy{
-    public static const NAME:String = "ColorProxy";
-    public function get color():ApplicationSettings{return data as ApplicationSettings;}
-    public function set color(newColor:ApplicationSettings):void{this.color.setColor(newColor);}
-    public function ApplicationSettingsProxy(name:String=null) {
-        super(NAME, new ApplicationSettings());
+    public static const NAME:String = "ApplicationSettingsProxy";
+    public function get settings():ApplicationSettingsVO{return data as ApplicationSettingsVO;}
+    public function ApplicationSettingsProxy() {
+        super(NAME, new ApplicationSettingsVO());
     }
 }
 }

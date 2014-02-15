@@ -8,6 +8,7 @@
 package app.appMvc.controller {
 import app.appMvc.Notes;
 import app.appMvc.model.canvas.CanvasProxy;
+import app.appMvc.model.color.ApplicationSettingsProxy;
 import app.appMvc.view.CanvasMediator;
 import app.appMvc.view.StageMediator;
 import app.appMvc.view.toolbar.ToolbarMediator;
@@ -25,6 +26,7 @@ public class StartupCommand extends SimpleCommand {
         facade.registerCommand(Notes.SET_TOOL_COMMAND,SetToolCommand);
 
         // insert registerProxy()s here
+        facade.registerProxy(new ApplicationSettingsProxy());
         facade.registerProxy(new CanvasProxy(stage));
 
         // insert registerMediator()s here
