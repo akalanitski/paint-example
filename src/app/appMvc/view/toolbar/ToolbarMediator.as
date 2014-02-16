@@ -48,14 +48,20 @@ public class ToolbarMediator extends Mediator {
     private function handleClickedToolbarButton(e:Event):void {
         switch (e.target) {
             case toolbar.buttons[0]:
+                sendNotification(Notes.SET_TOOL_PENCIL);
+                break;
             case toolbar.buttons[1]:
+                sendNotification(Notes.SET_TOOL_STENCIL_BRUSH);
+                break;
             case toolbar.buttons[2]:
+                sendNotification(Notes.SET_TOOL_SQUARE);
+                break;
             case toolbar.buttons[3]:
-                sendNotification(Notes.SET_TOOL_COMMAND, e);
+                sendNotification(Notes.SET_TOOL_HAND);
                 break;
             case toolbar.buttons[4]:
-                var canvasProxy:AppManagerProxy = facade.retrieveProxy(AppManagerProxy.NAME) as AppManagerProxy;
-                canvasProxy.appManager.clearCanvas();
+                    trace("clear");
+                break;
         }
     }
 

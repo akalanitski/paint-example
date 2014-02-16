@@ -6,49 +6,32 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.appManager {
-import app.appMvc.view.*;
 import app.appMvc.Notes;
-import app.appMvc.model.appManager.AppManagerProxy;
-import app.appMvc.model.tool.ToolPencil;
-import app.appMvc.model.tool.ToolSquare;
-import app.appMvc.model.tool.ToolStencilBrush;
 
-import flash.display.Stage;
 import flash.events.KeyboardEvent;
 import flash.ui.Keyboard;
 
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.mediator.Mediator;
 
-public class AppManagerMediator extends Mediator{
+public class AppManagerMediator extends Mediator {
     public static const NAME:String = "AppManagerMediator";
-
-    private var _appManagerProxy:AppManagerProxy;
-    private var _stage:Stage;
-    public function AppManagerMediator() {
-        super(NAME);
-
-        _appManagerProxy = facade.retrieveProxy(AppManagerProxy.NAME) as AppManagerProxy;
-
-        var stageMediator:StageMediator = facade.retrieveMediator(StageMediator.NAME) as StageMediator;
-        _stage = stageMediator.stage;
-    }
-
+    public function AppManagerMediator() {super(NAME);}
 
     override public function listNotificationInterests():Array {
         return [
-                Notes.KEY_DOWN
+            Notes.KEY_UP
         ]
     }
 
     override public function handleNotification(note:INotification):void {
-        var keyEvent:KeyboardEvent = note.getBody()as KeyboardEvent;
-        switch(keyEvent.keyCode){
+        var keyEvent:KeyboardEvent = note.getBody() as KeyboardEvent;
+        switch (keyEvent.keyCode) {
             case Keyboard.S:
-                _appManagerProxy.appManager.fileLoader.saveToPng();
+                trace("pressed S");
                 break;
             case Keyboard.O:
-                _appManagerProxy.appManager.fileLoader.loadFile();
+                trace("pressed O");
                 break;
         }
     }

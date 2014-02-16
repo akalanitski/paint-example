@@ -12,11 +12,24 @@ public class ToolProxy extends Proxy {
         return data as Tool;
     }
 
-    public function set currentTool(newTool:Tool):void {
-        if (currentTool.getName() == newTool.getName()){
+    public function setCurrentTool(toolName:String):void {
+        if (currentTool.getName() == toolName || currentTool.isInUse) {
             return;
         }
-        currentTool=newTool;
+        switch (toolName) {
+            case ToolHand.NAME:
+                data = new ToolHand();
+                break;
+            case ToolPencil.NAME:
+                data = new ToolPencil();
+                break;
+            case ToolStencilBrush.NAME:
+                data = new ToolStencilBrush();
+                break;
+            case ToolSquare.NAME:
+                data = new ToolSquare();
+                break;
+        }
     }
 }
 }

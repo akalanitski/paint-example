@@ -15,6 +15,9 @@ public class Notes {
     public static const KEY_UP:String = "key_up";
     public static const ADD_CHILD:String = "addChild";
     public static const REMOVE_CHILD:String = "removeChild";
-    public static const SET_TOOL_COMMAND:String = "setToolCommand";
+    public static const SET_TOOL_HAND:String = "SET_TOOL_HAND";
+    public static const SET_TOOL_PENCIL:String = "SET_TOOL_PENCIL";
+    public static const SET_TOOL_STENCIL_BRUSH:String = "SET_TOOL_STENCIL_BRUSH";
+    public static const SET_TOOL_SQUARE:String = "SET_TOOL_SQUARE";
 }
 }

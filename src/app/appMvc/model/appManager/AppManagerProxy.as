@@ -7,6 +7,8 @@
  */
 package app.appMvc.model.appManager {
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.document.DocumentProxy;
+import app.appMvc.model.tool.ToolMediator;
 import app.appMvc.model.tool.ToolProxy;
 
 import flash.display.Stage;
@@ -15,23 +17,28 @@ import org.puremvc.as3.patterns.proxy.Proxy;
 
 public class AppManagerProxy extends Proxy {
     public static const NAME:String = "AppManagerProxy";
+    private var _applicationSettingsProxy:ApplicationSettingsProxy;
+    private var _toolProxy:ToolProxy;
+    private var _documentProxy:DocumentProxy;
 
+    private var _stage:Stage;
     public function AppManagerProxy(stage:Stage) {
-        super(NAME, new AppManagerVO(stage));
-    }
-
-    public function get appManager():AppManagerVO {
-        return data as AppManagerVO;
+        super(NAME);
+        _stage = stage;
     }
 
     override public function onRegister():void {
-        facade.registerProxy(new ApplicationSettingsProxy());
-        facade.registerProxy(new ToolProxy());
-        appManager.addListeners();
-    }
+        _applicationSettingsProxy = new ApplicationSettingsProxy();
+        _toolProxy = new ToolProxy();
+        _documentProxy = new DocumentProxy();
 
-    override public function onRemove():void {
-        appManager.removeListeners();
+        facade.registerProxy(_applicationSettingsProxy);
+        facade.registerProxy(_toolProxy);
+        facade.registerProxy(_documentProxy);
+
+        facade.registerMediator(new ToolMediator());
     }
+    override public function onRemove():void {}
+
 }
 }

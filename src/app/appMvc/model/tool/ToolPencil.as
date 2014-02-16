@@ -6,7 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.tool {
-import flash.display.Graphics;
 import flash.events.MouseEvent;
 
 public class ToolPencil extends Tool {
@@ -18,7 +17,6 @@ public class ToolPencil extends Tool {
     public function ToolPencil() {
         super(NAME);
     }
-
     private var _prevX:Number;
     private var _prevY:Number;
     override public function handleMouseDown(e:MouseEvent):void {
