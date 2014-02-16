@@ -3,7 +3,10 @@
  */
 package app.appMvc.view.toolbar {
 import app.appMvc.Notes;
-import app.appMvc.model.appManager.AppManagerProxy;
+import app.appMvc.model.tool.ToolHand;
+import app.appMvc.model.tool.ToolPencil;
+import app.appMvc.model.tool.ToolSquare;
+import app.appMvc.model.tool.ToolStencilBrush;
 
 import flash.display.Stage;
 import flash.events.Event;
@@ -46,24 +49,24 @@ public class ToolbarMediator extends Mediator {
     }
 
     private function handleClickedToolbarButton(e:Event):void {
+
         switch (e.target) {
             case toolbar.buttons[0]:
-                sendNotification(Notes.SET_TOOL_PENCIL);
+                sendNotification(Notes.SET_TOOL, ToolPencil.NAME);
                 break;
             case toolbar.buttons[1]:
-                sendNotification(Notes.SET_TOOL_STENCIL_BRUSH);
+                sendNotification(Notes.SET_TOOL, ToolStencilBrush.NAME);
                 break;
             case toolbar.buttons[2]:
-                sendNotification(Notes.SET_TOOL_SQUARE);
+                sendNotification(Notes.SET_TOOL, ToolSquare.NAME);
                 break;
             case toolbar.buttons[3]:
-                sendNotification(Notes.SET_TOOL_HAND);
+                sendNotification(Notes.SET_TOOL, ToolHand.NAME);
                 break;
             case toolbar.buttons[4]:
                     trace("clear");
                 break;
         }
     }
-
 }
 }

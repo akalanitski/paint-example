@@ -8,6 +8,7 @@
 package app.appMvc.model.appManager {
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 import app.appMvc.model.document.DocumentProxy;
+import app.appMvc.model.tool.Tool;
 import app.appMvc.model.tool.ToolMediator;
 import app.appMvc.model.tool.ToolProxy;
 
@@ -40,5 +41,6 @@ public class AppManagerProxy extends Proxy {
     }
     override public function onRemove():void {}
 
+    public function get currentTool():Tool{return _toolProxy.currentTool;}
 }
 }

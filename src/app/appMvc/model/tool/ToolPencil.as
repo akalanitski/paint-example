@@ -20,12 +20,14 @@ public class ToolPencil extends Tool {
     private var _prevX:Number;
     private var _prevY:Number;
     override public function handleMouseDown(e:MouseEvent):void {
+        trace("pencil start");
         _isInUse = true;
         _prevX = e.stageX;
         _prevY = e.stageY;
     }
 
     override public function handleMouseUp(e:MouseEvent):void {
+        trace("pencil finish    ");
         _isInUse = false;
     }
 
