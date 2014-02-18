@@ -16,6 +16,14 @@ public class ToolStencilBrush extends Tool {
     }
 
     override public function handleMouseDown(e:MouseEvent):void {
+        e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
+
+        if(!activeLayer) {
+            trace("No active layer");
+            e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.NULL_ACTIVE_LAYER,true));
+            return;
+        }
+
         _isInUse = true;
     }
 
@@ -28,10 +36,10 @@ public class ToolStencilBrush extends Tool {
             useTool(e);
         }
         function useTool(e:MouseEvent):void {
-//            _graphics.beginFill(0x000000, 1.0);
-//            _graphics.lineStyle();
-//            _graphics.drawCircle(e.stageX, e.stageY, 5);
-//            _graphics.endFill();
+            activeLayer.graphics.beginFill(0x000000, 1.0);
+            activeLayer.graphics.lineStyle();
+            activeLayer.graphics.drawCircle(e.stageX, e.stageY, 5);
+            activeLayer.graphics.endFill();
         }
     }
 }

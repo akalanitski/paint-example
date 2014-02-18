@@ -36,8 +36,12 @@ public class AppManagerProxy extends Proxy {
         facade.registerProxy(_applicationSettingsProxy);
         facade.registerProxy(_toolProxy);
         facade.registerProxy(_documentProxy);
-
         facade.registerMediator(new ToolMediator());
+
+        // set active layer
+        _applicationSettingsProxy.settings.activeLayer = _documentProxy.documents[0].layers[0];
+        // add active layer to stage
+        _stage.addChildAt(_documentProxy.documents[0].layers[0],0);
     }
     override public function onRemove():void {}
 

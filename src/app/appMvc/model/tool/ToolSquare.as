@@ -20,6 +20,14 @@ public class ToolSquare extends Tool {
     }
 
     override public function handleMouseDown(e:MouseEvent):void {
+        e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
+
+        if(!activeLayer) {
+            trace("No active layer");
+            e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.NULL_ACTIVE_LAYER,true));
+            return;
+        }
+
         trace("SquareDown");
         _isInUse = true;
     }

@@ -13,8 +13,8 @@ public class ApplicationSettingsVO {
     private var _frontColor:uint = 0x000000;
     private var _backColor:uint = 0xFFFFFF;
     private var _appBackground:uint = 0x777777;
-    private var _activeLayer:Layer;
-    private var _activeDocument:Document;
+    public var activeLayer:Layer;
+    public var activeDocument:Document;
     private var _selectedLayers:Vector.<Layer>;
     public function ApplicationSettingsVO() {}
 

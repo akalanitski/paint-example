@@ -24,14 +24,15 @@ public class StartupCommand extends SimpleCommand {
         // insert registerCommand()s here
 
         // insert registerProxy()s here
-        facade.registerProxy(new AppManagerProxy(stage));
 
         // insert registerMediator()s here
         facade.registerMediator(new StageMediator(stage));
-        facade.registerMediator(new AppManagerMediator());
         facade.registerMediator(new ToolbarMediator(stage));
+        // ...
 
         // insert post actions here
+        facade.registerProxy(new AppManagerProxy(stage));
+        facade.registerMediator(new AppManagerMediator());
         // ...
 
         trace("executed StartupCommand");
