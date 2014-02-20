@@ -8,8 +8,8 @@
 package app.appMvc.controller {
 import app.appMvc.model.appManager.AppManagerMediator;
 import app.appMvc.model.appManager.AppManagerProxy;
-import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
-import app.appMvc.view.StageMediator;
+import app.appMvc.view.KeyMediator;
+import app.appMvc.view.MouseMediator;
 import app.appMvc.view.toolbar.ToolbarMediator;
 
 import flash.display.Stage;
@@ -26,8 +26,9 @@ public class StartupCommand extends SimpleCommand {
         // insert registerProxy()s here
 
         // insert registerMediator()s here
-        facade.registerMediator(new StageMediator(stage));
-        facade.registerMediator(new ToolbarMediator(stage));
+        facade.registerMediator(new KeyMediator());
+        facade.registerMediator(new MouseMediator());
+        facade.registerMediator(new ToolbarMediator());
         // ...
 
         // insert post actions here
