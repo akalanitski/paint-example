@@ -9,6 +9,7 @@ import flash.display.Sprite;
 
 public class App extends Sprite {
     public function App(){
+        S._stage = this.stage;
         AppFacade.getInstance().sendNotification(Notes.STARTUP, this.stage);
     }
 }
