@@ -8,7 +8,6 @@
 package app.appMvc.model.tool {
 import app.S;
 
-import flash.display.Graphics;
 import flash.events.MouseEvent;
 
 public class ToolStencilBrush extends Tool {
@@ -21,7 +20,7 @@ public class ToolStencilBrush extends Tool {
     override protected function updateSettings():void {
         S.stage.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
     }
-    override protected function onMouseDown(e:MouseEvent):void {
+    override protected function postMouseDown(e:MouseEvent):void {
         _isInUse = true;
     }
 

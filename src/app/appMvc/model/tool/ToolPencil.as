@@ -21,7 +21,7 @@ public class ToolPencil extends Tool {
     private var _prevX:Number;
     private var _prevY:Number;
 
-    override protected function onMouseDown(e:MouseEvent):void {
+    override protected function postMouseDown(e:MouseEvent):void {
         trace("pencil start");
         _isInUse = true;
         _prevX = e.stageX;

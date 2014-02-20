@@ -7,7 +7,9 @@
  */
 package app.appMvc.model.appManager {
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.document.Document;
 import app.appMvc.model.document.DocumentProxy;
+import app.appMvc.model.document.Layer;
 import app.appMvc.model.tool.Tool;
 import app.appMvc.model.tool.ToolMediator;
 import app.appMvc.model.tool.ToolProxy;
@@ -22,10 +24,8 @@ public class AppManagerProxy extends Proxy {
     private var _toolProxy:ToolProxy;
     private var _documentProxy:DocumentProxy;
 
-    private var _stage:Stage;
-    public function AppManagerProxy(stage:Stage) {
+    public function AppManagerProxy() {
         super(NAME);
-        _stage = stage;
     }
 
     override public function onRegister():void {
@@ -36,15 +36,14 @@ public class AppManagerProxy extends Proxy {
         facade.registerProxy(_applicationSettingsProxy);
         facade.registerProxy(_toolProxy);
         facade.registerProxy(_documentProxy);
-        facade.registerMediator(new ToolMediator());
 
         // set active layer
-        _applicationSettingsProxy.settings.activeLayer = _documentProxy.documents[0].layers[0];
-        // add active layer to stage
-        _stage.addChildAt(_documentProxy.documents[0].layers[0],0);
+        setActiveLayer(_documentProxy.documents[0].layers[0]);
+        setActiveDocument(_documentProxy.documents[0]);
     }
-    override public function onRemove():void {}
 
-    public function get currentTool():Tool{return _toolProxy.currentTool;}
+    public function setActiveDocument(doc:Document):void{_applicationSettingsProxy.settings.activeDocument = doc;}
+    public function setActiveLayer(layer:Layer):void {_applicationSettingsProxy.settings.activeLayer = layer;}
+    public function get currentTool():Tool {return _toolProxy.currentTool;}
 }
 }

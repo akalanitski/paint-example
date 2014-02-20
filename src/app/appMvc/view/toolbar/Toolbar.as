@@ -21,8 +21,6 @@ public class Toolbar extends Sprite {
 
         addButtons();
 
-        S.stage.addChild(this);
-
         function addButtons():void{
             const xInitPos:int = 5;
             const yInitPos:int = 5;

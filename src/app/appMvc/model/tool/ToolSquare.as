@@ -21,20 +21,20 @@ public class ToolSquare extends Tool {
     }
 
     override protected function updateSettings():void {
-        S.stage.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
+        S.stage.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER, true));
     }
-    override protected function onMouseDown(e:MouseEvent):void {
+    override protected function postMouseDown(e:MouseEvent):void {
         trace("SquareDown");
         _isInUse = true;
     }
 
-    override public function handleMouseUp(e:MouseEvent) :void{
+    override public function handleMouseUp(e:MouseEvent):void {
         trace("SquareUp");
         _isInUse = false;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (_isInUse){
+        if (_isInUse) {
             trace("SquareMove");
         }
     }

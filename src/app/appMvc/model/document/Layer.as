@@ -6,7 +6,6 @@ import flash.display.Graphics;
 import flash.display.Sprite;
 
 public class Layer extends Sprite{
-    private var _name:String;
     public function Layer() {}
 }
 }

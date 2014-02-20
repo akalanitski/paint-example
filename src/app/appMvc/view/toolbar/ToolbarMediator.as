@@ -20,7 +20,10 @@ public class ToolbarMediator extends Mediator {
     public static const NAME:String = "ToolbarMediator";
 
     public function get toolbar():Toolbar {return viewComponent as Toolbar;}
-    public function ToolbarMediator() {super(NAME, new Toolbar());}
+    public function ToolbarMediator() {
+        super(NAME, new Toolbar());
+        S.stage.addChild(toolbar);
+    }
 
     private function handleKeyUp(e:KeyboardEvent):void {
         switch (e.keyCode) {

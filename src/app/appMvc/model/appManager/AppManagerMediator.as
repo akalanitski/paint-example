@@ -44,7 +44,7 @@ public class AppManagerMediator extends Mediator {
                     _appManagerProxy.currentTool.handleMouseDown(note.getBody() as MouseEvent);
                 }catch(error:Error){
                     if (error.message == ToolSettingsEvent.ERROR_NULL_ACTIVE_LAYER) {
-                        trace("No active layer.")
+                        trace("No active layer.");
                     }
                 }
                 break;
