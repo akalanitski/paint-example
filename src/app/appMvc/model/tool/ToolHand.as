@@ -16,7 +16,7 @@ public class ToolHand extends Tool {
     public static const HAND_TOOL_MOUSE_UP:String = "HAND_TOOL_MOUSE_UP";
     public static const HAND_TOOL_MOUSE_MOVE:String = "HAND_TOOL_MOUSE_MOVE";
 
-    override public function handleMouseDown(e:MouseEvent):void {
+    override protected function onMouseDown(e:MouseEvent):void {
         var dispatcher:EventDispatcher = new EventDispatcher();
         dispatcher.dispatchEvent(new Event(HAND_TOOL_MOUSE_DOWN,true));
     }

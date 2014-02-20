@@ -3,14 +3,15 @@
  */
 package app.appMvc.model.tool {
 
+import app.S;
+
 import flash.display.Graphics;
+import flash.display.Stage;
 import flash.events.MouseEvent;
 
 public class ToolSquare extends Tool {
     public static const NAME:String = "ToolSquare";
-    public function ToolSquare() {
-        super(NAME);
-    }
+    public function ToolSquare() {super(NAME);}
 
     private const StateNone:String = "none";
     private const StateClicked:String = "clicked";
@@ -19,15 +20,10 @@ public class ToolSquare extends Tool {
         _state = newState;
     }
 
-    override public function handleMouseDown(e:MouseEvent):void {
-        e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
-
-        if(!activeLayer) {
-            trace("No active layer");
-            e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.NULL_ACTIVE_LAYER,true));
-            return;
-        }
-
+    override protected function updateSettings():void {
+        S.stage.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
+    }
+    override protected function onMouseDown(e:MouseEvent):void {
         trace("SquareDown");
         _isInUse = true;
     }

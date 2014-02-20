@@ -8,7 +8,8 @@
 package app.appMvc.model.tool {
 import app.appMvc.model.document.Layer;
 
-import flash.display.Sprite;
+import flash.display.Stage;
+
 import flash.events.MouseEvent;
 
 public class Tool {
@@ -20,7 +21,18 @@ public class Tool {
     public function get isInUse():Boolean {return _isInUse;}
     public function getName():String {return _toolName;}
 
-    public function handleMouseDown(e:MouseEvent):void {}
+    public final function handleMouseDown(e:MouseEvent):void {
+        updateSettings();
+        validateSettings();
+        onMouseDown(e);
+    }
+    // sends events to update settings
+    protected function updateSettings():void {}
+    // throws errors on wrong settings
+    protected function validateSettings():void {}
+    // called after updating and validating settings
+    protected function onMouseDown(e:MouseEvent):void {}
+
     public function handleMouseUp(e:MouseEvent):void {}
     public function handleMouseMove(e:MouseEvent):void {}
 }

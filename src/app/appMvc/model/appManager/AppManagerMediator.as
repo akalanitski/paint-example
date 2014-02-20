@@ -7,6 +7,7 @@
  */
 package app.appMvc.model.appManager {
 import app.appMvc.Notes;
+import app.appMvc.model.tool.ToolSettingsEvent;
 
 import flash.events.KeyboardEvent;
 import flash.events.MouseEvent;
@@ -39,7 +40,13 @@ public class AppManagerMediator extends Mediator {
                 break;
 
             case Notes.MOUSE_DOWN:
-                _appManagerProxy.currentTool.handleMouseDown(note.getBody() as MouseEvent);
+                try{
+                    _appManagerProxy.currentTool.handleMouseDown(note.getBody() as MouseEvent);
+                }catch(error:Error){
+                    if (error.message == ToolSettingsEvent.ERROR_NULL_ACTIVE_LAYER) {
+                        trace("No active layer.")
+                    }
+                }
                 break;
 
             case Notes.MOUSE_MOVE:

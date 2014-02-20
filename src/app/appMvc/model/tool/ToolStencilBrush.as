@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.tool {
+import app.S;
+
 import flash.display.Graphics;
 import flash.events.MouseEvent;
 
@@ -15,15 +17,11 @@ public class ToolStencilBrush extends Tool {
         super(NAME);
     }
 
-    override public function handleMouseDown(e:MouseEvent):void {
-        e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
 
-        if(!activeLayer) {
-            trace("No active layer");
-            e.target.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.NULL_ACTIVE_LAYER,true));
-            return;
-        }
-
+    override protected function updateSettings():void {
+        S.stage.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
+    }
+    override protected function onMouseDown(e:MouseEvent):void {
         _isInUse = true;
     }
 

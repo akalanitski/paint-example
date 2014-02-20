@@ -3,14 +3,8 @@ import org.puremvc.as3.patterns.proxy.Proxy;
 
 public class ToolProxy extends Proxy {
     public static const NAME:String = "ToolProxy";
-
-    public function ToolProxy() {
-        super(NAME, new ToolPencil());
-    }
-
-    public function get currentTool():Tool {
-        return data as Tool;
-    }
+    public function ToolProxy() {super(NAME, new ToolPencil());}
+    public function get currentTool():Tool {return data as Tool;}
 
     public function setCurrentTool(toolName:String):void {
         if (currentTool.getName() == toolName || currentTool.isInUse) {

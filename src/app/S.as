@@ -6,6 +6,6 @@ import flash.display.Stage;
 
 public class S {
     public static var _stage:Stage;
-    public static function get stage():Stage{return _stage};
+    public static function get stage():Stage{return _stage;}
 }
 }

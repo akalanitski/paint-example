@@ -2,8 +2,9 @@
  * Created by cfe on 11.02.14.
  */
 package app.appMvc.view.toolbar {
+import app.S;
+
 import flash.display.Sprite;
-import flash.display.Stage;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.text.TextField;
@@ -12,7 +13,7 @@ public class Toolbar extends Sprite {
     public static const CLICKED_BUTTON:String = "Clicked_Button";
     public var buttons:Vector.<Sprite> = new <Sprite>[];
 
-    public function Toolbar(stage:Stage) {
+    public function Toolbar() {
         //draws toolbar's background
         graphics.beginFill(0x444444);
         graphics.drawRect(0, 0, 300, 30);
@@ -20,7 +21,7 @@ public class Toolbar extends Sprite {
 
         addButtons();
 
-        stage.addChild(this);
+        S.stage.addChild(this);
 
         function addButtons():void{
             const xInitPos:int = 5;
