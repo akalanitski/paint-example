@@ -4,6 +4,8 @@
 package app.appMvc.view.toolbar {
 import app.S;
 import app.appMvc.Notes;
+import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.document.Layer;
 import app.appMvc.model.tool.ToolHand;
 import app.appMvc.model.tool.ToolPencil;
 import app.appMvc.model.tool.ToolSquare;
@@ -59,7 +61,9 @@ public class ToolbarMediator extends Mediator {
                 sendNotification(Notes.SET_TOOL, ToolHand.NAME);
                 break;
             case toolbar.buttons[4]:
-                    trace("clear");
+                var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
+                    var activeLayer:Layer = appSettingsProxy.settings.activeLayer;
+                    if (activeLayer){activeLayer.graphics.clear()}
                 break;
         }
     }

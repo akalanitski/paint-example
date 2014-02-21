@@ -14,12 +14,12 @@ public class ToolMediator extends Mediator {
     public function ToolMediator() {super(NAME);}
 
     override public function onRegister():void {
-        S.stage.addEventListener(ToolSettingsEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
+        S.stage.addEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
         _toolProxy = facade.retrieveProxy(ToolProxy.NAME) as ToolProxy;
     }
 
     override public function onRemove():void {
-        S.stage.removeEventListener(ToolSettingsEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
+        S.stage.removeEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
     }
     private function handleUpdateActiveLayer(e:Event):void {
         var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;

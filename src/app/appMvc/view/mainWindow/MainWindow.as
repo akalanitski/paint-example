@@ -7,7 +7,10 @@ import app.appMvc.model.document.Document;
 
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.events.MouseEvent;
 
+// displays document contents on checker pattern with border, on top of one colored background
+// sends events for using tool on mouse clicks.
 public class MainWindow extends Sprite {
     private var _docBack:Sprite = new Sprite();
     private var _shiftDocX:int = 0;
@@ -15,16 +18,33 @@ public class MainWindow extends Sprite {
     private var _document:Document = null;
     function MainWindow(doc:Document) {
         addChildAt(_docBack, 0);
-        setDocument(doc);
         updateWindowBack();
-        addListeners();
+        setDocument(doc);
     }
 
     public function addListeners():void {
         S.stage.addEventListener(Event.RESIZE, handleResize, false, 0, true);
+
+        S.stage.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
+        S.stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp, false, 0, true);
+        S.stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove, false, 0, true);
     }
     public function removeListeners():void {
         S.stage.removeEventListener(Event.RESIZE, handleResize);
+
+        S.stage.removeEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
+        S.stage.removeEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
+        S.stage.removeEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
+    }
+    private function handleMouseDown(e:MouseEvent):void {
+        // TODO: additionally send localDocX, localDocY
+        S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_DOWN, e, true));
+    }
+    private function handleMouseMove(e:MouseEvent):void {
+        S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_MOVE, e, true));
+    }
+    private function handleMouseUp(e:MouseEvent):void {
+        S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_UP, e, true))
     }
     private function handleResize(e:Event):void {
         updateWindowBack();
@@ -34,12 +54,13 @@ public class MainWindow extends Sprite {
     public function setDocument(doc:Document):void {
         if (_document != doc) {
             if (_document) {
-                removeChild(_document);
+                _docBack.removeChild(_document);
             }
             if (doc) {
-                addChildAt(doc, 1);
+                _docBack.addChild(doc);
             }
             _document = doc;
+            updateDocumentBack();
         }
     }
 
@@ -62,8 +83,8 @@ public class MainWindow extends Sprite {
         _docBack.graphics.drawRect(0, 0, _document.docWidth, _document.docHeight);
         _docBack.graphics.endFill();
 
-        _docBack.x = S.stage.stageWidth / 2.0 - _docBack.width / 2.0 + _shiftDocX;
-        _docBack.y = S.stage.stageHeight / 2.0 - _docBack.height / 2.0 + _shiftDocY;
+        _docBack.x = Math.round(S.stage.stageWidth / 2.0 - _docBack.width / 2.0 + _shiftDocX);
+        _docBack.y = Math.round(S.stage.stageHeight / 2.0 - _docBack.height / 2.0 + _shiftDocY);
     }
 
     public function get shiftDocX():int {return _shiftDocX;}

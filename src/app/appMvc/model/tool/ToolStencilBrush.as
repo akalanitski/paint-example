@@ -18,7 +18,7 @@ public class ToolStencilBrush extends Tool {
 
 
     override protected function updateSettings():void {
-        S.stage.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER,true));
+        S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER,true));
     }
     override protected function postMouseDown(e:MouseEvent):void {
         _isInUse = true;

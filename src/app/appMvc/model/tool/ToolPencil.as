@@ -29,12 +29,12 @@ public class ToolPencil extends Tool {
     }
 
     override protected function updateSettings():void {
-        S.stage.dispatchEvent(new ToolSettingsEvent(ToolSettingsEvent.UPDATE_ACTIVE_LAYER, true));
+        S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER, true));
     }
 
     override protected function validateSettings():void {
         if (!activeLayer) {
-            throw (ToolSettingsEvent.ERROR_NULL_ACTIVE_LAYER);
+            throw (ToolEvent.ERROR_NULL_ACTIVE_LAYER);
         }
     }
 

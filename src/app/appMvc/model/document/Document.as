@@ -11,6 +11,7 @@ public class Document extends Sprite {
     private var _layers:Vector.<Layer> = new <Layer>[new Layer()];
     public function Document() {
         scrollRect = (new Rectangle(0, 0, docWidth, docHeight));
+        addChild(_layers[0]);
     }
 
     public function get docWidth():uint {return _docWidth;}
