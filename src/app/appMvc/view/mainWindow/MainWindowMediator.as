@@ -3,16 +3,14 @@ import app.S;
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 
+import flash.events.MouseEvent;
+
 import org.puremvc.as3.interfaces.INotification;
 
 import org.puremvc.as3.patterns.mediator.Mediator;
 
 public class MainWindowMediator extends Mediator {
     public static const NAME:String = "MainWindowMediator";
-    private const MAIN_WINDOW_MOUSE_DOWN:String = "MAIN_WINDOW_MOUSE_DOWN";
-    private const MAIN_WINDOW_MOUSE_MOVE:String = "MAIN_WINDOW_MOUSE_MOVE";
-    private const MAIN_WINDOW_MOUSE_UP:String = "MAIN_WINDOW_MOUSE_UP";
-
     public function get mainWindow():MainWindow {return viewComponent as MainWindow;}
     public function MainWindowMediator() {
         super(NAME);
@@ -49,14 +47,37 @@ public class MainWindowMediator extends Mediator {
         S.stage.removeEventListener(MainWindowEvent.MOUSE_MOVE, handleMouseMove);
         S.stage.removeEventListener(MainWindowEvent.MOUSE_UP, handleMouseUp);
     }
+
     private function handleMouseDown(e:MainWindowEvent):void {
-        sendNotification(MAIN_WINDOW_MOUSE_DOWN, e);
+        sendNotification(Notes.MAIN_WINDOW_MOUSE_DOWN, e);
+        sendNotification(Notes.MAIN_WINDOW_DOC_MOUSE_DOWN, relativeDocMouseEvent(e));
     }
+
     private function handleMouseMove(e:MainWindowEvent):void {
-        sendNotification(MAIN_WINDOW_MOUSE_MOVE, e);
+        sendNotification(Notes.MAIN_WINDOW_MOUSE_MOVE, e);
+        sendNotification(Notes.MAIN_WINDOW_DOC_MOUSE_MOVE, relativeDocMouseEvent(e));
     }
+
     private function handleMouseUp(e:MainWindowEvent):void {
-        sendNotification(MAIN_WINDOW_MOUSE_UP, e);
+        sendNotification(Notes.MAIN_WINDOW_MOUSE_UP, e);
+        var mE:MouseEvent = e.data as MouseEvent;
+        sendNotification(Notes.MAIN_WINDOW_DOC_MOUSE_UP, {
+            mouseEvent: relativeDocMouseEvent(e),
+            relX:mE.stageX - mainWindow.shiftDocX,
+            relY:mE.stageY - mainWindow.shiftDocY
+        });
+    }
+
+    private function relativeDocMouseEvent(e:MainWindowEvent):MouseEvent {
+        var mE:MouseEvent = e.data as MouseEvent;
+        mE.localX = mE.stageX - mainWindow.shiftDocX;
+        mE.localY = mE.stageY - mainWindow.shiftDocY;
+//        var relDocMouseEvent:MouseEvent = new MouseEvent(mE.type, mE.bubbles, mE.cancelable,
+//                                                      mE.localX = mE.stageX - mainWindow.shiftDocX,
+//                                                      mE.localY = mE.stageY - mainWindow.shiftDocY,
+//                                                      mE.relatedObject, mE.ctrlKey, mE.altKey,
+//                                                      mE.shiftKey, mE.buttonDown, mE.delta);
+        return mE;// relDocMouseEvent;
     }
 }
 }

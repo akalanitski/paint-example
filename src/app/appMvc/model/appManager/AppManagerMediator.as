@@ -27,19 +27,19 @@ public class AppManagerMediator extends Mediator {
     override public function listNotificationInterests():Array {
         return [
             Notes.KEY_UP,
-            Notes.MOUSE_DOWN,
-            Notes.MOUSE_UP,
-            Notes.MOUSE_MOVE
+            Notes.MAIN_WINDOW_DOC_MOUSE_DOWN,
+            Notes.MAIN_WINDOW_DOC_MOUSE_MOVE,
+            Notes.MAIN_WINDOW_DOC_MOUSE_UP
         ]
     }
 
     override public function handleNotification(note:INotification):void {
         switch (note.getName()) {
-            case Notes.MOUSE_UP:
+            case Notes.MAIN_WINDOW_DOC_MOUSE_UP:
                 _appManagerProxy.currentTool.handleMouseUp(note.getBody() as MouseEvent);
                 break;
 
-            case Notes.MOUSE_DOWN:
+            case Notes.MAIN_WINDOW_DOC_MOUSE_DOWN:
                 try{
                     _appManagerProxy.currentTool.handleMouseDown(note.getBody() as MouseEvent);
                 }catch(error:Error){
@@ -49,7 +49,7 @@ public class AppManagerMediator extends Mediator {
                 }
                 break;
 
-            case Notes.MOUSE_MOVE:
+            case Notes.MAIN_WINDOW_DOC_MOUSE_MOVE:
                 _appManagerProxy.currentTool.handleMouseMove(note.getBody() as MouseEvent);
                 break;
 
