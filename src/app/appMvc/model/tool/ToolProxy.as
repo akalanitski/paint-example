@@ -23,7 +23,7 @@ public class ToolProxy extends Proxy {
         sendNotification(Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND,{shiftDocX:currentTool.shiftDocX,shiftDocY:currentTool.shiftDocY},MainWindowMediator.NAME);
     }
     private function handlePullShiftDocCoordinates(e:ToolEvent):void {
-        sendNotification(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, ToolProxy.NAME);
+        sendNotification(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, null, ToolProxy.NAME);
     }
 
     public function setCurrentTool(toolName:String):void {

@@ -87,9 +87,9 @@ public class MainWindow extends Sprite {
         _docBack.y = Math.round(S.stage.stageHeight / 2.0 - _docBack.height / 2.0 + _shiftDocY);
     }
 
-    public function get shiftDocX():int {return _shiftDocX;}
-    public function set shiftDocX(value:int):void {_shiftDocX = value;}
-    public function get shiftDocY():int {return _shiftDocY;}
-    public function set shiftDocY(value:int):void {_shiftDocY = value;}
+    public function get shiftDocX():Number {return _shiftDocX;}
+    public function set shiftDocX(value:Number):void {_shiftDocX = Math.round(value);}
+    public function get shiftDocY():Number {return _shiftDocY;}
+    public function set shiftDocY(value:Number):void {_shiftDocY = Math.round(value);}
 }
 }

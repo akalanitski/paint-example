@@ -8,15 +8,12 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
 public class PushShiftDocCoordinatesCommand extends SimpleCommand {
     public function PushShiftDocCoordinatesCommand() {}
     override public function execute(note:INotification):void {
-        var mainWindowMediator:MainWindowMediator = facade.retrieveMediator(MainWindowMediator.NAME) as MainWindowMediator;
-        var toolProxy:ToolProxy = facade.retrieveProxy(ToolProxy.NAME) as ToolProxy;
-        trace(mainWindowMediator.mainWindow.shiftDocX, mainWindowMediator.mainWindow.shiftDocY);
-//        trace(toolProxy.currentTool.shiftDocX, toolProxy.currentTool.shiftDocY);
-        trace("push");
         var shiftDocX:Number = note.getBody().shiftDocX;
         var shiftDocY:Number = note.getBody().shiftDocY;
-        mainWindowMediator.mainWindow.shiftDocX = shiftDocX; // toolProxy.currentTool.shiftDocX;
-        mainWindowMediator.mainWindow.shiftDocY = shiftDocY; // toolProxy.currentTool.shiftDocY;
+
+        var mainWindowMediator:MainWindowMediator = facade.retrieveMediator(MainWindowMediator.NAME) as MainWindowMediator;
+        mainWindowMediator.mainWindow.shiftDocX = shiftDocX;
+        mainWindowMediator.mainWindow.shiftDocY = shiftDocY;
     }
 }
 }
