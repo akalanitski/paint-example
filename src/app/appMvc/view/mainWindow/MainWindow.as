@@ -13,8 +13,8 @@ import flash.events.MouseEvent;
 // sends events for using tool on mouse clicks.
 public class MainWindow extends Sprite {
     private var _docBack:Sprite = new Sprite();
-    private var _shiftDocX:int = 0;
-    private var _shiftDocY:int = 0;
+    private var _shiftDocX:Number = 0.0;
+    private var _shiftDocY:Number = 0.0;
     private var _document:Document = null;
     function MainWindow(doc:Document) {
         addChildAt(_docBack, 0);

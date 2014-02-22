@@ -14,6 +14,8 @@ public class Tool {
     protected var _isInUse:Boolean = false;
     protected var _toolName:String;
     public var activeLayer:Layer = null;
+    public var shiftDocX:Number = 0.0;
+    public var shiftDocY:Number = 0.0;
     function Tool(toolName:String) {_toolName = toolName;}
 
     public function get isInUse():Boolean {return _isInUse;}

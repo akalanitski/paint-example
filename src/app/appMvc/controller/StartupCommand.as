@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.controller {
+import app.appMvc.Notes;
 import app.appMvc.model.appManager.AppManagerMediator;
 import app.appMvc.model.appManager.AppManagerProxy;
 import app.appMvc.model.tool.ToolMediator;
@@ -22,9 +23,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
 public class StartupCommand extends SimpleCommand {
     override public function execute(note:INotification):void {
         // insert registerCommand()s here
+        facade.registerCommand(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, PullShiftDocCoordinatesCommand);
+        facade.registerCommand(Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND, PushShiftDocCoordinatesCommand);
+        //...
 
         // insert registerProxy()s here
         facade.registerProxy(new AppManagerProxy());
+        //...
 
         // insert registerMediator()s here
         facade.registerMediator(new AppManagerMediator());

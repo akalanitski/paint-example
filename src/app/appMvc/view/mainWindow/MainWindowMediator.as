@@ -1,6 +1,9 @@
 package app.appMvc.view.mainWindow {
 import app.S;
+import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+
+import org.puremvc.as3.interfaces.INotification;
 
 import org.puremvc.as3.patterns.mediator.Mediator;
 
@@ -17,6 +20,19 @@ public class MainWindowMediator extends Mediator {
         setViewComponent(new MainWindow(appSettingsProxy.settings.activeDocument));
     }
 
+    override public function listNotificationInterests():Array {
+        return [
+            Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND
+        ]
+    }
+
+    override public function handleNotification(note:INotification):void {
+        switch (note.getName()) {
+            case Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND:
+                mainWindow.updateDocumentBack();
+                break;
+        }
+    }
     override public function onRegister():void {
         S.stage.addChildAt(mainWindow, 0);
         mainWindow.addListeners();
