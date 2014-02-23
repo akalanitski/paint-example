@@ -36,7 +36,6 @@ public class MainWindow extends Sprite {
         S.stage.removeEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
     }
     private function handleMouseDown(e:MouseEvent):void {
-        // TODO: additionally send localDocX, localDocY
         S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_DOWN, e, true));
     }
     private function handleMouseMove(e:MouseEvent):void {
@@ -82,7 +81,7 @@ public class MainWindow extends Sprite {
         _docBack.graphics.drawRect(0, 0, _document.docWidth, _document.docHeight);
         _docBack.graphics.endFill();
     }
-    private function centerDocumentView(){
+    private function centerDocumentView():void{
         if(_document){
             docOx = S.stage.stageWidth / 2.0 - _docBack.width / 2.0;
             docOy = S.stage.stageHeight / 2.0 - _docBack.height / 2.0;
