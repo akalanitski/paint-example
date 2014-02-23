@@ -23,11 +23,10 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
 public class StartupCommand extends SimpleCommand {
     override public function execute(note:INotification):void {
         // insert registerCommand()s here
-        facade.registerCommand(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, PullShiftDocCoordinatesCommand);
-        facade.registerCommand(Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND, PushShiftDocCoordinatesCommand);
-        facade.registerCommand(Notes.PULL_ACTIVE_DOCUMENT_COMMAND, PullActiveDocumentCommand);
-        facade.registerCommand(Notes.PULL_ACTIVE_LAYER_COMMAND, PullActiveLayerCommand);
-        facade.registerCommand(Notes.PUSH_RELATIVE_DOC_COORD_COMMAND, PushRelativeDocCoordCommand);
+        facade.registerCommand(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND, PushDocOriginCoordinatesCommand);
+        facade.registerCommand(Notes.PUSH_ACTIVE_DOCUMENT_COMMAND, PushActiveDocumentCommand);
+        facade.registerCommand(Notes.PUSH_ACTIVE_LAYER_COMMAND, PushActiveLayerCommand);
+        facade.registerCommand(Notes.PUSH_DOC_RELATIVE_MOUSE_COORDINATES_COMMAND, PushDocRelativeMouseCoordinatesCommand);
         //...
 
         // insert registerProxy()s here

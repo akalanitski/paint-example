@@ -51,7 +51,6 @@ public class AppManagerMediator extends Mediator {
                 break;
 
             case Notes.MAIN_WINDOW_MOUSE_MOVE:
-                sendNotification(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, null, ToolProxy.NAME);
                 _appManagerProxy.currentTool.handleMouseMove(note.getBody() as MouseEvent);
                 break;
 

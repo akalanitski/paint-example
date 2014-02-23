@@ -21,13 +21,13 @@ public class MainWindowMediator extends Mediator {
 
     override public function listNotificationInterests():Array {
         return [
-//            Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND
+//            Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND
         ]
     }
 
     override public function handleNotification(note:INotification):void {
 //        switch (note.getName()) {
-//            case Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND:
+//            case Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND:
 //                mainWindow.updateDocumentBack();
 //                break;
 //        }
@@ -64,7 +64,7 @@ public class MainWindowMediator extends Mediator {
     }
     private function sendRelativeCoords(mE:MouseEvent):void {
         sendNotification(
-                Notes.PUSH_RELATIVE_DOC_COORD_COMMAND, {
+                Notes.PUSH_DOC_RELATIVE_MOUSE_COORDINATES_COMMAND, {
                     relX: mE.stageX - mainWindow.docOx,
                     relY: mE.stageY - mainWindow.docOy},
                 ToolProxy.NAME);

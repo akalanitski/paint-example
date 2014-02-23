@@ -11,19 +11,19 @@ public class ToolProxy extends Proxy {
     public function get currentTool():Tool {return data as Tool;}
 
     override public function onRegister():void {
-        S.stage.addEventListener(ToolEvent.PULL_SHIFT_DOC_COORDINATES, handlePullShiftDocCoordinates,false, 0, true);
-        S.stage.addEventListener(ToolEvent.PUSH_SHIFT_DOC_COORDINATES, handlePushShiftDocCoordinates, false, 0 , true);
+        S.stage.addEventListener(ToolEvent.PULL_SHIFT_DOC_COORDINATES, handlePullDocOriginCoordinates,false, 0, true);
+        S.stage.addEventListener(ToolEvent.PUSH_SHIFT_DOC_COORDINATES, handlePushDocOriginCoordinates, false, 0 , true);
     }
 
     override public function onRemove():void {
-        S.stage.removeEventListener(ToolEvent.PULL_SHIFT_DOC_COORDINATES, handlePullShiftDocCoordinates);
-        S.stage.removeEventListener(ToolEvent.PUSH_SHIFT_DOC_COORDINATES, handlePushShiftDocCoordinates);
+        S.stage.removeEventListener(ToolEvent.PULL_SHIFT_DOC_COORDINATES, handlePullDocOriginCoordinates);
+        S.stage.removeEventListener(ToolEvent.PUSH_SHIFT_DOC_COORDINATES, handlePushDocOriginCoordinates);
     }
-    private function handlePushShiftDocCoordinates(e:ToolEvent):void {
-        sendNotification(Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND,{shiftDocX:currentTool.docOx,shiftDocY:currentTool.docOy},MainWindowMediator.NAME);
+    private function handlePushDocOriginCoordinates(e:ToolEvent):void {
+        sendNotification(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND,{docOx:currentTool.docOx,docOy:currentTool.docOy},MainWindowMediator.NAME);
     }
-    private function handlePullShiftDocCoordinates(e:ToolEvent):void {
-        sendNotification(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, null, ToolProxy.NAME);
+    private function handlePullDocOriginCoordinates(e:ToolEvent):void {
+        sendNotification(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND, null, ToolProxy.NAME);
     }
 
     public function setCurrentTool(toolName:String):void {

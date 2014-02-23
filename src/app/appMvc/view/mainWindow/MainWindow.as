@@ -81,8 +81,8 @@ public class MainWindow extends Sprite {
         _docBack.graphics.drawRect(0, 0, _document.docWidth, _document.docHeight);
         _docBack.graphics.endFill();
 
-        _docBack.x = Math.round(S.stage.stageWidth / 2.0 - _docBack.width / 2.0);
-        _docBack.y = Math.round(S.stage.stageHeight / 2.0 - _docBack.height / 2.0);
+        docOx = S.stage.stageWidth / 2.0 - _docBack.width / 2.0;
+        docOy = S.stage.stageHeight / 2.0 - _docBack.height / 2.0;
     }
 
     public function get docOx():Number {return _docBack.x;}
