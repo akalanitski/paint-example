@@ -24,8 +24,8 @@ public class ToolPencil extends Tool {
     override protected function postMouseDown(e:MouseEvent):void {
         trace("pencil start");
         _isInUse = true;
-        _prevX = e.localX;
-        _prevY = e.localY;
+        _prevX = relX ;
+        _prevY = relY;
     }
 
     override protected function updateSettings():void {
@@ -52,9 +52,9 @@ public class ToolPencil extends Tool {
             activeLayer.graphics.beginFill(0x000000, 1.0);
             activeLayer.graphics.lineStyle(5, 0x000000, 1.0);
             activeLayer.graphics.moveTo(_prevX, _prevY);
-            activeLayer.graphics.lineTo(e.localX, e.localY);
-            _prevX = e.localX;
-            _prevY = e.localY;
+            activeLayer.graphics.lineTo(relX, relY);
+            _prevX = relX;
+            _prevY = relY;
             activeLayer.graphics.endFill();
         }
     }

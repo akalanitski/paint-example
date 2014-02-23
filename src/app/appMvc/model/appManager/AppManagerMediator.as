@@ -8,6 +8,7 @@
 package app.appMvc.model.appManager {
 import app.appMvc.Notes;
 import app.appMvc.model.tool.ToolEvent;
+import app.appMvc.model.tool.ToolProxy;
 
 import flash.events.KeyboardEvent;
 import flash.events.MouseEvent;
@@ -27,29 +28,30 @@ public class AppManagerMediator extends Mediator {
     override public function listNotificationInterests():Array {
         return [
             Notes.KEY_UP,
-            Notes.MAIN_WINDOW_DOC_MOUSE_DOWN,
-            Notes.MAIN_WINDOW_DOC_MOUSE_MOVE,
-            Notes.MAIN_WINDOW_DOC_MOUSE_UP
+            Notes.MAIN_WINDOW_MOUSE_DOWN,
+            Notes.MAIN_WINDOW_MOUSE_MOVE,
+            Notes.MAIN_WINDOW_MOUSE_UP
         ]
     }
 
     override public function handleNotification(note:INotification):void {
         switch (note.getName()) {
-            case Notes.MAIN_WINDOW_DOC_MOUSE_UP:
+            case Notes.MAIN_WINDOW_MOUSE_UP:
                 _appManagerProxy.currentTool.handleMouseUp(note.getBody() as MouseEvent);
                 break;
 
-            case Notes.MAIN_WINDOW_DOC_MOUSE_DOWN:
-                try{
+            case Notes.MAIN_WINDOW_MOUSE_DOWN:
+                try {
                     _appManagerProxy.currentTool.handleMouseDown(note.getBody() as MouseEvent);
-                }catch(error:Error){
+                } catch (error:Error) {
                     if (error.message == ToolEvent.ERROR_NULL_ACTIVE_LAYER) {
                         trace("No active layer.");
                     }
                 }
                 break;
 
-            case Notes.MAIN_WINDOW_DOC_MOUSE_MOVE:
+            case Notes.MAIN_WINDOW_MOUSE_MOVE:
+                sendNotification(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, null, ToolProxy.NAME);
                 _appManagerProxy.currentTool.handleMouseMove(note.getBody() as MouseEvent);
                 break;
 

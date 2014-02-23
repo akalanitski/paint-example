@@ -2,6 +2,7 @@ package app.appMvc.view.mainWindow {
 import app.S;
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.tool.ToolProxy;
 
 import flash.events.MouseEvent;
 
@@ -20,16 +21,16 @@ public class MainWindowMediator extends Mediator {
 
     override public function listNotificationInterests():Array {
         return [
-            Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND
+//            Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND
         ]
     }
 
     override public function handleNotification(note:INotification):void {
-        switch (note.getName()) {
-            case Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND:
-                mainWindow.updateDocumentBack();
-                break;
-        }
+//        switch (note.getName()) {
+//            case Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND:
+//                mainWindow.updateDocumentBack();
+//                break;
+//        }
     }
     override public function onRegister():void {
         S.stage.addChildAt(mainWindow, 0);
@@ -49,35 +50,24 @@ public class MainWindowMediator extends Mediator {
     }
 
     private function handleMouseDown(e:MainWindowEvent):void {
-        sendNotification(Notes.MAIN_WINDOW_MOUSE_DOWN, e);
-        sendNotification(Notes.MAIN_WINDOW_DOC_MOUSE_DOWN, relativeDocMouseEvent(e));
+        sendRelativeCoords(e.data as MouseEvent);
+        sendNotification(Notes.MAIN_WINDOW_MOUSE_DOWN, e.data as MouseEvent);
     }
 
     private function handleMouseMove(e:MainWindowEvent):void {
-        sendNotification(Notes.MAIN_WINDOW_MOUSE_MOVE, e);
-        sendNotification(Notes.MAIN_WINDOW_DOC_MOUSE_MOVE, relativeDocMouseEvent(e));
+        sendRelativeCoords(e.data as MouseEvent);
+        sendNotification(Notes.MAIN_WINDOW_MOUSE_MOVE, e.data as MouseEvent);
     }
-
     private function handleMouseUp(e:MainWindowEvent):void {
-        sendNotification(Notes.MAIN_WINDOW_MOUSE_UP, e);
-        var mE:MouseEvent = e.data as MouseEvent;
-        sendNotification(Notes.MAIN_WINDOW_DOC_MOUSE_UP, {
-            mouseEvent: relativeDocMouseEvent(e),
-            relX:mE.stageX - mainWindow.shiftDocX,
-            relY:mE.stageY - mainWindow.shiftDocY
-        });
+        sendRelativeCoords(e.data as MouseEvent);
+        sendNotification(Notes.MAIN_WINDOW_MOUSE_UP, e.data as MouseEvent);
     }
-
-    private function relativeDocMouseEvent(e:MainWindowEvent):MouseEvent {
-        var mE:MouseEvent = e.data as MouseEvent;
-        mE.localX = mE.stageX - mainWindow.shiftDocX;
-        mE.localY = mE.stageY - mainWindow.shiftDocY;
-//        var relDocMouseEvent:MouseEvent = new MouseEvent(mE.type, mE.bubbles, mE.cancelable,
-//                                                      mE.localX = mE.stageX - mainWindow.shiftDocX,
-//                                                      mE.localY = mE.stageY - mainWindow.shiftDocY,
-//                                                      mE.relatedObject, mE.ctrlKey, mE.altKey,
-//                                                      mE.shiftKey, mE.buttonDown, mE.delta);
-        return mE;// relDocMouseEvent;
+    private function sendRelativeCoords(mE:MouseEvent):void {
+        sendNotification(
+                Notes.PUSH_RELATIVE_DOC_COORD_COMMAND, {
+                    relX: mE.stageX - mainWindow.docOx,
+                    relY: mE.stageY - mainWindow.docOy},
+                ToolProxy.NAME);
     }
 }
 }

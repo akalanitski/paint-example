@@ -35,7 +35,7 @@ public class ToolStencilBrush extends Tool {
         function useTool(e:MouseEvent):void {
             activeLayer.graphics.beginFill(0x000000, 1.0);
             activeLayer.graphics.lineStyle();
-            activeLayer.graphics.drawCircle(e.stageX, e.stageY, 5);
+            activeLayer.graphics.drawCircle(relX, relY, 5);
             activeLayer.graphics.endFill();
         }
     }

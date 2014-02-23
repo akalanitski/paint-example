@@ -25,6 +25,9 @@ public class StartupCommand extends SimpleCommand {
         // insert registerCommand()s here
         facade.registerCommand(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, PullShiftDocCoordinatesCommand);
         facade.registerCommand(Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND, PushShiftDocCoordinatesCommand);
+        facade.registerCommand(Notes.PULL_ACTIVE_DOCUMENT_COMMAND, PullActiveDocumentCommand);
+        facade.registerCommand(Notes.PULL_ACTIVE_LAYER_COMMAND, PullActiveLayerCommand);
+        facade.registerCommand(Notes.PUSH_RELATIVE_DOC_COORD_COMMAND, PushRelativeDocCoordCommand);
         //...
 
         // insert registerProxy()s here

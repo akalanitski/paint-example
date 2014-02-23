@@ -13,8 +13,6 @@ import flash.events.MouseEvent;
 // sends events for using tool on mouse clicks.
 public class MainWindow extends Sprite {
     private var _docBack:Sprite = new Sprite();
-    private var _shiftDocX:Number = 0.0;
-    private var _shiftDocY:Number = 0.0;
     private var _document:Document = null;
     function MainWindow(doc:Document) {
         addChildAt(_docBack, 0);
@@ -83,13 +81,13 @@ public class MainWindow extends Sprite {
         _docBack.graphics.drawRect(0, 0, _document.docWidth, _document.docHeight);
         _docBack.graphics.endFill();
 
-        _docBack.x = Math.round(S.stage.stageWidth / 2.0 - _docBack.width / 2.0 + _shiftDocX);
-        _docBack.y = Math.round(S.stage.stageHeight / 2.0 - _docBack.height / 2.0 + _shiftDocY);
+        _docBack.x = Math.round(S.stage.stageWidth / 2.0 - _docBack.width / 2.0);
+        _docBack.y = Math.round(S.stage.stageHeight / 2.0 - _docBack.height / 2.0);
     }
 
-    public function get shiftDocX():Number {return _shiftDocX;}
-    public function set shiftDocX(value:Number):void {_shiftDocX = Math.round(value);}
-    public function get shiftDocY():Number {return _shiftDocY;}
-    public function set shiftDocY(value:Number):void {_shiftDocY = Math.round(value);}
+    public function get docOx():Number {return _docBack.x;}
+    public function set docOx(value:Number):void {_docBack.x = Math.round(value);}
+    public function get docOy():Number {return _docBack.y;}
+    public function set docOy(value:Number):void {_docBack.y = Math.round(value);}
 }
 }

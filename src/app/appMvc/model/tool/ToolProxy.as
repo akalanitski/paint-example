@@ -20,7 +20,7 @@ public class ToolProxy extends Proxy {
         S.stage.removeEventListener(ToolEvent.PUSH_SHIFT_DOC_COORDINATES, handlePushShiftDocCoordinates);
     }
     private function handlePushShiftDocCoordinates(e:ToolEvent):void {
-        sendNotification(Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND,{shiftDocX:currentTool.shiftDocX,shiftDocY:currentTool.shiftDocY},MainWindowMediator.NAME);
+        sendNotification(Notes.PUSH_SHIFT_DOC_COORDINATES_COMMAND,{shiftDocX:currentTool.docOx,shiftDocY:currentTool.docOy},MainWindowMediator.NAME);
     }
     private function handlePullShiftDocCoordinates(e:ToolEvent):void {
         sendNotification(Notes.PULL_SHIFT_DOC_COORDINATES_COMMAND, null, ToolProxy.NAME);

@@ -13,23 +13,25 @@ public class ToolHand extends Tool {
     public function ToolHand() {super(NAME);}
     private var _prevMouseX:Number = 0.0;
     private var _prevMouseY:Number = 0.0;
-    private var _prevShiftX:Number = 0.0;
-    private var _prevShiftY:Number = 0.0;
+    private var _prevDocOx:Number = 0.0;
+    private var _prevDocOy:Number = 0.0;
 
     override protected function updateSettings():void {
         S.stage.dispatchEvent(new ToolEvent(ToolEvent.PULL_SHIFT_DOC_COORDINATES, true));
     }
     override protected function postMouseDown(e:MouseEvent):void {
         isInUse = true;
-        _prevShiftX = shiftDocX;
-        _prevShiftY = shiftDocY;
+        _prevDocOx = docOx;
+        _prevDocOy = docOy;
         _prevMouseX = e.stageX;
         _prevMouseY = e.stageY;
     }
     override public function handleMouseMove(e:MouseEvent):void {if (isInUse) {useTool(e);}}
     private function useTool(e:MouseEvent):void {
-        shiftDocX = e.stageX - _prevMouseX + _prevShiftX;
-        shiftDocY = e.stageY - _prevMouseY + _prevShiftY;
+        docOx = e.stageX - _prevMouseX + _prevDocOx;
+        docOy = e.stageY - _prevMouseY + _prevDocOy;
+        _prevMouseX = e.stageX;
+        _prevMouseY = e.stageY;
         S.stage.dispatchEvent(new ToolEvent(ToolEvent.PUSH_SHIFT_DOC_COORDINATES, true));
     }
     override public function handleMouseUp(e:MouseEvent):void {isInUse = false;}

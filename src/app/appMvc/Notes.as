@@ -26,13 +26,12 @@ public class Notes {
     public static const PUSH_SHIFT_DOC_COORDINATES_COMMAND:String = "PUSH_SHIFT_DOC_COORDINATES_COMMAND";
 
     // notes with relative doc coordinates
-    public static const MAIN_WINDOW_DOC_MOUSE_DOWN:String = "MAIN_WINDOW_DOC_MOUSE_DOWN";
-    public static const MAIN_WINDOW_DOC_MOUSE_MOVE:String = "MAIN_WINDOW_DOC_MOUSE_MOVE";
-    public static const MAIN_WINDOW_DOC_MOUSE_UP:String = "MAIN_WINDOW_DOC_MOUSE_UP";
-    //
     public static const MAIN_WINDOW_MOUSE_DOWN:String = "MAIN_WINDOW_MOUSE_DOWN";
     public static const MAIN_WINDOW_MOUSE_MOVE:String = "MAIN_WINDOW_MOUSE_MOVE";
     public static const MAIN_WINDOW_MOUSE_UP:String = "MAIN_WINDOW_MOUSE_UP";
-
+    public static const PUSH_RELATIVE_DOC_COORD_COMMAND:String = "PUSH_RELATIVE_DOC_COORD_COMMAND";
+    public static const PULL_ACTIVE_DOCUMENT_COMMAND:String = "PULL_ACTIVE_DOCUMENT_COMMAND";
+    public static const PUSH_ACTIVE_DOCUMENT_COMMAND:String = "PUSH_ACTIVE_DOCUMENT_COMMAND";
+    public static const PULL_ACTIVE_LAYER_COMMAND:String = "PULL_ACTIVE_LAYER_COMMAND";
 }
 }

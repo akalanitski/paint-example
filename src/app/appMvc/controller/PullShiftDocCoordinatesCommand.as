@@ -16,8 +16,8 @@ public class PullShiftDocCoordinatesCommand extends SimpleCommand {
             switch(note.getType()){
                 case ToolProxy.NAME:
                     var toolProxy:ToolProxy = facade.retrieveProxy(ToolProxy.NAME) as ToolProxy;
-                    toolProxy.currentTool.shiftDocX = mainWindowMediator.mainWindow.shiftDocX;
-                    toolProxy.currentTool.shiftDocY = mainWindowMediator.mainWindow.shiftDocY;
+                    toolProxy.currentTool.docOx = mainWindowMediator.mainWindow.docOx;
+                    toolProxy.currentTool.docOy = mainWindowMediator.mainWindow.docOy;
                     break;
                 default :
                     trace("No destination for shiftDoc coordinates specified.");
