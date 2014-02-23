@@ -9,8 +9,8 @@ public class ToolEvent extends Event{
     public static const ERROR_NULL_ACTIVE_LAYER:String = "ERROR_NULL_ACTIVE_LAYER";
 
     // ToolHand settings from MainWindow
-    public static const PULL_SHIFT_DOC_COORDINATES:String = "PULL_SHIFT_DOC_COORDINATES";
-    public static const PUSH_SHIFT_DOC_COORDINATES:String = "PUSH_SHIFT_DOC_COORDINATES";
+    public static const PULL_DOC_ORIGIN_COORDINATES:String = "PULL_DOC_ORIGIN_COORDINATES";
+    public static const PUSH_DOC_ORIGIN_COORDINATES:String = "PUSH_DOC_ORIGIN_COORDINATES";
 
     public function ToolEvent(type:String,bubbles:Boolean = false,cancelable:Boolean = false){
         super(type,bubbles,cancelable);

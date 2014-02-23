@@ -10,7 +10,7 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 
 // displays document contents on checker pattern with border, on top of one colored background
-// sends events for using tool on mouse clicks.
+// sends mouse events for using tool etc.
 public class MainWindow extends Sprite {
     private var _docBack:Sprite = new Sprite();
     private var _document:Document = null;
@@ -18,6 +18,7 @@ public class MainWindow extends Sprite {
         addChildAt(_docBack, 0);
         updateWindowBack();
         setDocument(doc);
+        centerDocumentView();
     }
 
     public function addListeners():void {
@@ -80,9 +81,12 @@ public class MainWindow extends Sprite {
         _docBack.graphics.beginFill(0xFFFFFF);
         _docBack.graphics.drawRect(0, 0, _document.docWidth, _document.docHeight);
         _docBack.graphics.endFill();
-
-        docOx = S.stage.stageWidth / 2.0 - _docBack.width / 2.0;
-        docOy = S.stage.stageHeight / 2.0 - _docBack.height / 2.0;
+    }
+    private function centerDocumentView(){
+        if(_document){
+            docOx = S.stage.stageWidth / 2.0 - _docBack.width / 2.0;
+            docOy = S.stage.stageHeight / 2.0 - _docBack.height / 2.0;
+        }
     }
 
     public function get docOx():Number {return _docBack.x;}
