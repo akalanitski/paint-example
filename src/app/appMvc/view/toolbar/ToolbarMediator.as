@@ -6,7 +6,10 @@ import app.S;
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 import app.appMvc.model.document.Layer;
+import app.appMvc.model.tool.ToolEllipse;
+import app.appMvc.model.tool.ToolEraser;
 import app.appMvc.model.tool.ToolHand;
+import app.appMvc.model.tool.ToolLine;
 import app.appMvc.model.tool.ToolPencil;
 import app.appMvc.model.tool.ToolSquare;
 import app.appMvc.model.tool.ToolStencilBrush;
@@ -61,6 +64,15 @@ public class ToolbarMediator extends Mediator {
                 sendNotification(Notes.SET_TOOL, ToolHand.NAME);
                 break;
             case toolbar.buttons[4]:
+                sendNotification(Notes.SET_TOOL, ToolLine.NAME);
+                break;
+            case toolbar.buttons[5]:
+                sendNotification(Notes.SET_TOOL, ToolEllipse.NAME);
+                break;
+            case toolbar.buttons[6]:
+                sendNotification(Notes.SET_TOOL, ToolEraser.NAME);
+                break;
+            case toolbar.buttons[7]:
                 var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
                     var activeLayer:Layer = appSettingsProxy.settings.activeLayer;
                     if (activeLayer){activeLayer.graphics.clear()}

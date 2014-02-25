@@ -16,7 +16,7 @@ public class Toolbar extends Sprite {
     public function Toolbar() {
         //draws toolbar's background
         graphics.beginFill(0x444444);
-        graphics.drawRect(0, 0, 300, 30);
+        graphics.drawRect(0, 0, 360, 30);
         graphics.endFill();
 
         addButtons();
@@ -26,7 +26,7 @@ public class Toolbar extends Sprite {
             const yInitPos:int = 5;
             var xPos:int = xInitPos;
             var yPos:int = yInitPos;
-            const xGap:int = 5;
+            const xGap:int = 4;
             var buttonWidth:int = 40;
             var buttonHeight:int = 20;
 
@@ -37,6 +37,12 @@ public class Toolbar extends Sprite {
             addButton(xPos, yPos, buttonWidth, buttonHeight, "Square");
             xPos += xGap + buttonWidth;
             addButton(xPos, yPos, buttonWidth, buttonHeight, "Hand");
+            xPos += xGap + buttonWidth;
+            addButton(xPos, yPos, buttonWidth, buttonHeight, "Line");
+            xPos += xGap + buttonWidth;
+            addButton(xPos, yPos, buttonWidth, buttonHeight, "Ellipse");
+            xPos += xGap + buttonWidth;
+            addButton(xPos, yPos, buttonWidth, buttonHeight, "Eraser");
             xPos += xGap + buttonWidth;
             addButton(xPos, yPos, buttonWidth, buttonHeight, "Clear");
         }

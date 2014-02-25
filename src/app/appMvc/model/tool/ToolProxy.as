@@ -43,6 +43,15 @@ public class ToolProxy extends Proxy {
             case ToolSquare.NAME:
                 data = new ToolSquare();
                 break;
+            case ToolLine.NAME:
+                data = new ToolLine();
+                break;
+            case ToolEraser.NAME:
+                data = new ToolEraser();
+                break;
+            case ToolEllipse.NAME:
+                data = new ToolEllipse();
+                break;
         }
     }
 }
