@@ -27,6 +27,7 @@ public class StartupCommand extends SimpleCommand {
         facade.registerCommand(Notes.PUSH_ACTIVE_DOCUMENT_COMMAND, PushActiveDocumentCommand);
         facade.registerCommand(Notes.PUSH_ACTIVE_LAYER_COMMAND, PushActiveLayerCommand);
         facade.registerCommand(Notes.PUSH_DOC_RELATIVE_MOUSE_COORDINATES_COMMAND, PushDocRelativeMouseCoordinatesCommand);
+        facade.registerCommand(Notes.SET_TOOL_COMMAND, SetToolCommand);
         //...
 
         // insert registerProxy()s here

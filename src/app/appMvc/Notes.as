@@ -20,7 +20,7 @@ public class Notes {
     public static const MOUSE_MOVE:String = "MOUSE_MOVE";
 
     // Tool events
-    public static const SET_TOOL:String = "SetTool";
+    public static const SET_TOOL_COMMAND:String = "SetToolCommand";
 
     public static const MAIN_WINDOW_MOUSE_DOWN:String = "MAIN_WINDOW_MOUSE_DOWN";
     public static const MAIN_WINDOW_MOUSE_MOVE:String = "MAIN_WINDOW_MOUSE_MOVE";

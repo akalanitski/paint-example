@@ -9,6 +9,7 @@ public class ToolProxy extends Proxy {
     public static const NAME:String = "ToolProxy";
     public function ToolProxy() {super(NAME, new ToolPencil());}
     public function get currentTool():Tool {return data as Tool;}
+    public function set currentTool(tool:Tool):void {data = tool;}
 
     override public function onRegister():void {
         S.stage.addEventListener(ToolEvent.PULL_DOC_ORIGIN_COORDINATES, handlePullDocOriginCoordinates,false, 0, true);
@@ -24,35 +25,6 @@ public class ToolProxy extends Proxy {
     }
     private function handlePullDocOriginCoordinates(e:ToolEvent):void {
         sendNotification(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND, null, ToolProxy.NAME);
-    }
-
-    public function setCurrentTool(toolName:String):void {
-        if (currentTool.getName() == toolName || currentTool.isInUse) {
-            return;
-        }
-        switch (toolName) {
-            case ToolHand.NAME:
-                data = new ToolHand();
-                break;
-            case ToolPencil.NAME:
-                data = new ToolPencil();
-                break;
-            case ToolStencilBrush.NAME:
-                data = new ToolStencilBrush();
-                break;
-            case ToolSquare.NAME:
-                data = new ToolSquare();
-                break;
-            case ToolLine.NAME:
-                data = new ToolLine();
-                break;
-            case ToolEraser.NAME:
-                data = new ToolEraser();
-                break;
-            case ToolEllipse.NAME:
-                data = new ToolEllipse();
-                break;
-        }
     }
 }
 }

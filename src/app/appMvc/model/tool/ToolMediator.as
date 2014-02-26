@@ -28,13 +28,13 @@ public class ToolMediator extends Mediator {
 
     override public function listNotificationInterests():Array {
         return [
-            Notes.SET_TOOL
+            Notes.SET_TOOL_COMMAND
         ]
     }
     override public function handleNotification(note:INotification):void {
         switch (note.getName()) {
-            case Notes.SET_TOOL:
-                _toolProxy.setCurrentTool(note.getBody() as String);
+            case Notes.SET_TOOL_COMMAND:
+//                sendNotification(Notes.SET_TOOL_COMMAND,);
                 break;
         }
     }

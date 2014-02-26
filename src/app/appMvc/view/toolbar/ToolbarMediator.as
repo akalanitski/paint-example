@@ -52,25 +52,25 @@ public class ToolbarMediator extends Mediator {
 
         switch (e.target) {
             case toolbar.buttons[0]:
-                sendNotification(Notes.SET_TOOL, ToolPencil.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolPencil.NAME);
                 break;
             case toolbar.buttons[1]:
-                sendNotification(Notes.SET_TOOL, ToolStencilBrush.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolStencilBrush.NAME);
                 break;
             case toolbar.buttons[2]:
-                sendNotification(Notes.SET_TOOL, ToolSquare.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolSquare.NAME);
                 break;
             case toolbar.buttons[3]:
-                sendNotification(Notes.SET_TOOL, ToolHand.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolHand.NAME);
                 break;
             case toolbar.buttons[4]:
-                sendNotification(Notes.SET_TOOL, ToolLine.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolLine.NAME);
                 break;
             case toolbar.buttons[5]:
-                sendNotification(Notes.SET_TOOL, ToolEllipse.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolEllipse.NAME);
                 break;
             case toolbar.buttons[6]:
-                sendNotification(Notes.SET_TOOL, ToolEraser.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolEraser.NAME);
                 break;
             case toolbar.buttons[7]:
                 var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
