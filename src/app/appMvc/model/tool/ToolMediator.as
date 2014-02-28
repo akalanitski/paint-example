@@ -1,11 +1,4 @@
 package app.appMvc.model.tool {
-import app.S;
-import app.appMvc.Notes;
-import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
-
-import flash.events.Event;
-
-import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.mediator.Mediator;
 
 public class ToolMediator extends Mediator {
@@ -14,29 +7,7 @@ public class ToolMediator extends Mediator {
     public function ToolMediator() {super(NAME);}
 
     override public function onRegister():void {
-        S.stage.addEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
         _toolProxy = facade.retrieveProxy(ToolProxy.NAME) as ToolProxy;
-    }
-
-    override public function onRemove():void {
-        S.stage.removeEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
-    }
-    private function handleUpdateActiveLayer(e:Event):void {
-        var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
-        _toolProxy.currentTool.activeLayer = appSettingsProxy.settings.activeLayer;
-    }
-
-    override public function listNotificationInterests():Array {
-        return [
-            Notes.SET_TOOL_COMMAND
-        ]
-    }
-    override public function handleNotification(note:INotification):void {
-        switch (note.getName()) {
-            case Notes.SET_TOOL_COMMAND:
-//                sendNotification(Notes.SET_TOOL_COMMAND,);
-                break;
-        }
     }
 }
 }

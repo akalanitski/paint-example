@@ -14,11 +14,16 @@ public class ToolProxy extends Proxy {
     override public function onRegister():void {
         S.stage.addEventListener(ToolEvent.PULL_DOC_ORIGIN_COORDINATES, handlePullDocOriginCoordinates,false, 0, true);
         S.stage.addEventListener(ToolEvent.PUSH_DOC_ORIGIN_COORDINATES, handlePushDocOriginCoordinates, false, 0 , true);
+        S.stage.addEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer, false, 0 , true);
     }
-
     override public function onRemove():void {
         S.stage.removeEventListener(ToolEvent.PULL_DOC_ORIGIN_COORDINATES, handlePullDocOriginCoordinates);
         S.stage.removeEventListener(ToolEvent.PUSH_DOC_ORIGIN_COORDINATES, handlePushDocOriginCoordinates);
+        S.stage.removeEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
+    }
+
+    private function handleUpdateActiveLayer(e:ToolEvent):void {
+        sendNotification(Notes.PUSH_ACTIVE_LAYER_COMMAND, null, ToolProxy.NAME);
     }
     private function handlePushDocOriginCoordinates(e:ToolEvent):void {
         sendNotification(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND,{docOx:currentTool.docOx,docOy:currentTool.docOy},MainWindowMediator.NAME);

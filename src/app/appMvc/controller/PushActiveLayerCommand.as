@@ -1,5 +1,6 @@
 package app.appMvc.controller {
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.tool.ToolLine;
 import app.appMvc.model.tool.ToolProxy;
 import app.appMvc.view.mainWindow.MainWindowMediator;
 
@@ -13,6 +14,10 @@ public class PushActiveLayerCommand extends SimpleCommand {
         var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
 
         switch (note.getType()) {
+            case ToolProxy.NAME:
+                var toolProxy:ToolProxy = facade.retrieveProxy(ToolProxy.NAME) as ToolProxy;
+                toolProxy.currentTool.activeLayer = appSettingsProxy.settings.activeLayer;
+                break;
 
             case MainWindowMediator.NAME:
                 var mainWindowMediator:MainWindowMediator = facade.retrieveMediator(MainWindowMediator.NAME) as MainWindowMediator;
