@@ -75,7 +75,9 @@ public class ToolbarMediator extends Mediator {
             case toolbar.buttons[7]:
                 var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
                     var activeLayer:Layer = appSettingsProxy.settings.activeLayer;
-                    if (activeLayer){activeLayer.graphics.clear()}
+                    if (activeLayer){
+                        activeLayer.clear();
+                    }
                 break;
         }
     }
