@@ -9,7 +9,11 @@ public class ToolProxy extends Proxy {
     public static const NAME:String = "ToolProxy";
     public function ToolProxy() {super(NAME, new ToolPencil());}
     public function get currentTool():Tool {return data as Tool;}
-    public function set currentTool(tool:Tool):void {data = tool;}
+    public function set currentTool(tool:Tool):void {
+        currentTool.onRemove();
+        data = tool;
+        tool.onRegister();
+    }
 
     override public function onRegister():void {
         S.stage.addEventListener(ToolEvent.PULL_DOC_ORIGIN_COORDINATES, handlePullDocOriginCoordinates,false, 0, true);

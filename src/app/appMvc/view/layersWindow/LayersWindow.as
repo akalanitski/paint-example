@@ -15,7 +15,7 @@ public class LayersWindow extends Sprite {
     private var _doc:Document;
     private var _back:Sprite = new Sprite();
     private var _scrollView:Sprite = new Sprite();
-    private var _layerSprites:Vector.<Sprite> = new Vector.<Sprite>();
+    private var _listSprites:Vector.<Sprite> = new Vector.<Sprite>();
     public function LayersWindow() {
         x = 100;
         y = 100;
@@ -42,7 +42,7 @@ public class LayersWindow extends Sprite {
         updateBackground();
     }
 
-    public function drawLayer(l:Layer, color:uint):void {
+    public function drawLayer(layer:Layer, color:uint):void {
         var gapX:int = 4;
         var gapY:int = 4;
         var thumbWidth:int = 40;
@@ -56,15 +56,18 @@ public class LayersWindow extends Sprite {
                                     gapY + thumbHeight + gapY);
         _scrollView.graphics.endFill();
 
-        // todo: fit thumb into rectangle
         var thumb:Sprite = new Sprite();
         thumb.x = gapX;
         thumb.y = gapY;
-        thumb.graphics.copyFrom(l.graphics);
+        thumb.graphics.copyFrom(layer.graphics);
         _scrollView.addChild(thumb);
 
+        var scale:Number = ((thumbHeight/thumbWidth) > (layer.height/layer.width)) ? (thumbWidth/layer.width) : (thumbHeight/layer.height);
+        thumb.scaleX = scale;
+        thumb.scaleY = scale;
+
         var layerName:TextField = new TextField();
-        layerName.text = l.name;
+        layerName.text = layer.name;
         layerName.x = gapX + thumbWidth + gapX;
         layerName.y = gapY;
         _scrollView.addChild(layerName);

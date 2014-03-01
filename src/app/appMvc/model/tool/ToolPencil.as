@@ -23,7 +23,7 @@ public class ToolPencil extends Tool {
 
     override protected function postMouseDown(e:MouseEvent):void {
         trace("pencil start");
-        _isInUse = true;
+        isInUse = true;
         _prevX = relX ;
         _prevY = relY;
     }
@@ -40,11 +40,11 @@ public class ToolPencil extends Tool {
 
     override public function handleMouseUp(e:MouseEvent):void {
         trace("pencil finish");
-        _isInUse = false;
+        isInUse = false;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (_isInUse) {
+        if (isInUse) {
             useTool(e);
         }
 

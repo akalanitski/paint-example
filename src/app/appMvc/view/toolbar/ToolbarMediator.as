@@ -11,7 +11,7 @@ import app.appMvc.model.tool.ToolEraser;
 import app.appMvc.model.tool.ToolHand;
 import app.appMvc.model.tool.ToolLine;
 import app.appMvc.model.tool.ToolPencil;
-import app.appMvc.model.tool.ToolSquare;
+import app.appMvc.model.tool.ToolRectangle;
 import app.appMvc.model.tool.ToolStencilBrush;
 
 import flash.display.Stage;
@@ -58,7 +58,7 @@ public class ToolbarMediator extends Mediator {
                 sendNotification(Notes.SET_TOOL_COMMAND, ToolStencilBrush.NAME);
                 break;
             case toolbar.buttons[2]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolSquare.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolRectangle.NAME);
                 break;
             case toolbar.buttons[3]:
                 sendNotification(Notes.SET_TOOL_COMMAND, ToolHand.NAME);

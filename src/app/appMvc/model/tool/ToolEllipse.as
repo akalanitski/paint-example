@@ -22,15 +22,15 @@ public class ToolEllipse extends Tool {
         S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER, true));
     }
     override protected function postMouseDown(e:MouseEvent):void {
-        _isInUse = true;
+        isInUse = true;
     }
 
     override public function handleMouseUp(e:MouseEvent):void {
-        _isInUse = false;
+        isInUse = false;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (_isInUse) {
+        if (isInUse) {
         }
     }
 }
