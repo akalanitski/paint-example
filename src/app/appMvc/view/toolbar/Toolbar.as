@@ -67,7 +67,7 @@ public class Toolbar extends Sprite {
 
     private function removeListeners():void {
         for (var i:int = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener(MouseEvent.CLICK, handleButtonClick, false, 0, true); // false, 0 /default values
+            buttons[i].removeEventListener(MouseEvent.CLICK, handleButtonClick);
         }
     }
     private function addButton(x:Number, y:Number, width:Number, height:Number, text:String):void {
@@ -85,7 +85,7 @@ public class Toolbar extends Sprite {
         buttonSprite.addChild(tf);
 
         addChild(buttonSprite);
-        buttonSprite.addEventListener(MouseEvent.CLICK, handleButtonClick, false, 0, true);
+        buttonSprite.addEventListener(MouseEvent.CLICK, handleButtonClick, false, 1, true);
         buttons.push(buttonSprite);
     }
 
