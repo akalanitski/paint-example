@@ -8,6 +8,7 @@ import app.appMvc.model.tool.ToolPencil;
 import app.appMvc.model.tool.ToolProxy;
 import app.appMvc.model.tool.ToolRectangle;
 import app.appMvc.model.tool.ToolStencilBrush;
+import app.appMvc.model.tool.ToolText;
 
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -42,6 +43,9 @@ public class SetToolCommand extends SimpleCommand {
                 break;
             case ToolEllipse.NAME:
                 toolProxy.currentTool = new ToolEllipse();
+                break;
+            case ToolText.NAME:
+                toolProxy.currentTool = new ToolText();
                 break;
         }
     }

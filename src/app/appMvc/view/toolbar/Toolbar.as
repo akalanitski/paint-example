@@ -2,7 +2,6 @@
  * Created by cfe on 11.02.14.
  */
 package app.appMvc.view.toolbar {
-import app.S;
 
 import flash.display.Sprite;
 import flash.events.Event;
@@ -16,7 +15,7 @@ public class Toolbar extends Sprite {
     public function Toolbar() {
         //draws toolbar's background
         graphics.beginFill(0x444444);
-        graphics.drawRect(0, 0, 360, 30);
+        graphics.drawRect(0, 0, 410, 30);
         graphics.endFill();
 
         addButtons();
@@ -41,6 +40,8 @@ public class Toolbar extends Sprite {
             addButton(xPos, yPos, buttonWidth, buttonHeight, "Line");
             xPos += xGap + buttonWidth;
             addButton(xPos, yPos, buttonWidth, buttonHeight, "Ellipse");
+            xPos += xGap + buttonWidth;
+            addButton(xPos, yPos, buttonWidth, buttonHeight, "Text");
             xPos += xGap + buttonWidth;
             addButton(xPos, yPos, buttonWidth, buttonHeight, "Eraser");
             xPos += xGap + buttonWidth;

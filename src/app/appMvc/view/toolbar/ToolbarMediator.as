@@ -13,6 +13,7 @@ import app.appMvc.model.tool.ToolLine;
 import app.appMvc.model.tool.ToolPencil;
 import app.appMvc.model.tool.ToolRectangle;
 import app.appMvc.model.tool.ToolStencilBrush;
+import app.appMvc.model.tool.ToolText;
 
 import flash.display.Stage;
 import flash.events.Event;
@@ -70,9 +71,12 @@ public class ToolbarMediator extends Mediator {
                 sendNotification(Notes.SET_TOOL_COMMAND, ToolEllipse.NAME);
                 break;
             case toolbar.buttons[6]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolEraser.NAME);
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolText.NAME);
                 break;
             case toolbar.buttons[7]:
+                sendNotification(Notes.SET_TOOL_COMMAND, ToolEraser.NAME);
+                break;
+            case toolbar.buttons[8]:
                 var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
                     var activeLayer:Layer = appSettingsProxy.settings.activeLayer;
                     if (activeLayer){
