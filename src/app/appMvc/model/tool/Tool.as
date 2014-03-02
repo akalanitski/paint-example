@@ -11,16 +11,20 @@ import app.appMvc.model.document.Layer;
 import flash.events.MouseEvent;
 
 public class Tool {
-    private var _isInUse:Boolean = false;
     protected var _toolName:String;
+    function Tool(toolName:String) {_toolName = toolName;}
+
+    private var _isInUse:Boolean = false;
+
     public var activeLayer:Layer = null;
+
     // document origin coordinates on stage
     public var docOx:Number = 0.0;
     public var docOy:Number = 0.0;
+
     // relative document mouse coordinates
     public var relX:Number = 0.0;
     public var relY:Number = 0.0;
-    function Tool(toolName:String) {_toolName = toolName;}
 
     public function onRegister():void {}
     public function onRemove():void {}
@@ -29,6 +33,7 @@ public class Tool {
     public function set isInUse(value:Boolean):void {_isInUse = value;}
     public function getName():String {return _toolName;}
 
+    // sequence method
     public final function handleMouseDown(e:MouseEvent):void {
         updateSettings();
         validateSettings();
