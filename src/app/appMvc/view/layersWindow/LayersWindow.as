@@ -25,7 +25,7 @@ public class LayersWindow extends Sprite {
         _scrollView.scrollRect = new Rectangle(0, 0, 60, 200);
         addChild(_scrollView);
 
-        S.stage.addChild(this);
+        stage.addChild(this);
     }
 
     public function updateBackground():void {

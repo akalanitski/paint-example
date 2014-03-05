@@ -12,6 +12,15 @@ public class ApplicationSettingsProxy extends Proxy {
     public static const NAME:String = "ApplicationSettingsProxy";
     public function ApplicationSettingsProxy() {super(NAME, new ApplicationSettingsVO());}
 
-    public function get settings():ApplicationSettingsVO {return data as ApplicationSettingsVO;}
+    public function setActiveDoc():void
+    {
+
+    }
+
+    public function setActiveLayer():void {
+
+    }
+
+    public function get settings():ApplicationSettingsVO {return this;}
 }
 }

@@ -4,6 +4,7 @@
 package app.appMvc.model.tool {
 
 import app.S;
+import app.appMvc.model.document.Layer;
 
 import flash.display.Graphics;
 import flash.display.Sprite;
@@ -12,7 +13,10 @@ import flash.events.MouseEvent;
 
 public class ToolEllipse extends Tool {
     public static const NAME:String = "ToolEllipse";
-    public function ToolEllipse() {super(NAME);}
+    public function ToolEllipse(activeLayer:Layer)
+    {
+        super(NAME, activeLayer);
+    }
 
     private var _state:String;
     private const STATE_NONE:String = "STATE_NONE";

@@ -1,4 +1,5 @@
 package app.appMvc.controller {
+import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 import app.appMvc.model.tool.Tool;
 import app.appMvc.model.tool.ToolEllipse;
 import app.appMvc.model.tool.ToolEraser;
@@ -22,6 +23,9 @@ public class SetToolCommand extends SimpleCommand {
         if (toolProxy.currentTool.getName() == toolName || toolProxy.currentTool.isInUse) {
             return;
         }
+
+        toolProxy.currentTool = note.getBody() as Tool;
+        toolProxy.currentTool.activeLayer = ApplicationSettingsProxy.settings.activeLayer;
         switch (toolName) {
             case ToolHand.NAME:
                 toolProxy.currentTool = new ToolHand();

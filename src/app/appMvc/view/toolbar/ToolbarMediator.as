@@ -6,6 +6,7 @@ import app.S;
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 import app.appMvc.model.document.Layer;
+import app.appMvc.model.tool.Tool;
 import app.appMvc.model.tool.ToolEllipse;
 import app.appMvc.model.tool.ToolEraser;
 import app.appMvc.model.tool.ToolHand;
@@ -26,6 +27,7 @@ public class ToolbarMediator extends Mediator {
     public static const NAME:String = "ToolbarMediator";
 
     public function get toolbar():Toolbar {return viewComponent as Toolbar;}
+
     public function ToolbarMediator() {
         super(NAME, new Toolbar());
         S.stage.addChild(toolbar);
@@ -40,20 +42,20 @@ public class ToolbarMediator extends Mediator {
     }
 
     override public function onRegister():void {
-        S.stage.addEventListener(Toolbar.CLICKED_BUTTON, handleClickedToolbarButton);
+        toolbar.addEventListener(Toolbar.CLICKED_BUTTON, handleClickedToolbarButton);
         S.stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
     }
 
     override public function onRemove():void {
-        S.stage.removeEventListener(Toolbar.CLICKED_BUTTON, handleClickedToolbarButton);
+        toolbar.removeEventListener(Toolbar.CLICKED_BUTTON, handleClickedToolbarButton);
         S.stage.removeEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
     }
 
     private function handleClickedToolbarButton(e:Event):void {
-
-        switch (e.target) {
-            case toolbar.buttons[0]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolPencil.NAME);
+        var tool:Tool;
+        switch (toolbar.selectedTool) {
+            case Toolbar.TOOL_PANCIL:
+                tool = new ToolPencil();
                 break;
             case toolbar.buttons[1]:
                 sendNotification(Notes.SET_TOOL_COMMAND, ToolStencilBrush.NAME);
@@ -83,7 +85,10 @@ public class ToolbarMediator extends Mediator {
                         activeLayer.clear();
                     }
                 break;
+
+
         }
+        sendNotification(Notes.SET_TOOL_COMMAND, tool);
     }
 }
 }

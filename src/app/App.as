@@ -12,14 +12,18 @@ import flash.display.StageScaleMode;
     /**
      * TODO: AppManagerProxy must save and control only it own properties
      * TODO: Add open/save function on toolbar
-     * TODO: ToolbarMediator can lister Toolbar instead stage
-     * TODO: hightlight selected tool on toolbar
+     * [TODO:] ToolbarMediator can lister Toolbar instead stage
      * TODO: Add color picker with foreground and background color settings
      *
-     * FIXME: remove link S.stage
+     * FIXME: remove link S.stage (save for short time)
      * FIXME: too match mediators and proxies. Proxy must wrap value object.
      * Mediator must connect view layer with MVC.
      *
+     *
+     * ---
+     * TODO: Move toolbar shortcut to KeyMediator
+     * TODO: Fill text to toolbar button
+     * TODO: Toolbar button, add over|down|selected states
      */
 public class App extends Sprite {
     public function App(){

@@ -20,7 +20,7 @@ import org.puremvc.as3.patterns.proxy.Proxy;
 
 public class AppManagerProxy extends Proxy {
     public static const NAME:String = "AppManagerProxy";
-    private var _applicationSettingsProxy:ApplicationSettingsProxy;
+    private var _applicationSettingsVO:ApplicationSettings;
     private var _toolProxy:ToolProxy;
     private var _documentProxy:DocumentProxy;
 

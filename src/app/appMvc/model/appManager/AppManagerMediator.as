@@ -22,7 +22,10 @@ public class AppManagerMediator extends Mediator {
     private var _appManagerProxy:AppManagerProxy;
     public function AppManagerMediator() {super(NAME);}
 
-    override public function onRegister():void {_appManagerProxy = facade.retrieveProxy(AppManagerProxy.NAME) as AppManagerProxy;}
+    override public function onRegister():void {
+        _appManagerProxy = facade.retrieveProxy(AppManagerProxy.NAME) as AppManagerProxy;
+    }
+
     override public function onRemove():void {}
 
     override public function listNotificationInterests():Array {

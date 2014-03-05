@@ -12,7 +12,10 @@ import flash.events.MouseEvent;
 
 public class Tool {
     protected var _toolName:String;
-    function Tool(toolName:String) {_toolName = toolName;}
+    function Tool(toolName:String, activeLayer:Layer) {
+        _toolName = toolName;
+        this.activeLayer = activeLayer;
+    }
 
     private var _isInUse:Boolean = false;
 
