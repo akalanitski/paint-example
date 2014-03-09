@@ -15,22 +15,16 @@ public class MainWindowMediator extends Mediator {
     public function get mainWindow():MainWindow {return viewComponent as MainWindow;}
     public function MainWindowMediator() {
         super(NAME);
-        var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
-        setViewComponent(new MainWindow(appSettingsProxy.settings.activeDocument));
+        var mainWindowProxy:MainWindowProxy = facade.retrieveProxy(MainWindowProxy.NAME) as MainWindowProxy;
+        setViewComponent(mainWindowProxy.getData() as MainWindow);
     }
 
     override public function listNotificationInterests():Array {
         return [
-//            Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND
         ]
     }
 
     override public function handleNotification(note:INotification):void {
-//        switch (note.getName()) {
-//            case Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND:
-//                mainWindow.updateDocumentBack();
-//                break;
-//        }
     }
     override public function onRegister():void {
         S.stage.addChildAt(mainWindow, 0);

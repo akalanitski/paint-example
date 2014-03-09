@@ -21,7 +21,7 @@ import flash.display.StageScaleMode;
      *
      *
      * ---
-     * TODO: Move toolbar shortcut to KeyMediator
+     * TODO: Move toolbar shortcut to KeyNotifierMediator
      * TODO: Fill text to toolbar button
      * TODO: Toolbar button, add over|down|selected states
      */

@@ -5,7 +5,8 @@
  * Time: 12:13
  * To change this template use File | Settings | File Templates.
  */
-package app.appMvc.model.tool {
+package app.appMvc.model.tool.vo {
+import app.appMvc.model.tool.*;
 import app.S;
 
 import flash.events.MouseEvent;

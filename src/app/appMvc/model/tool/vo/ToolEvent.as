@@ -1,7 +1,7 @@
 /**
  * Created by cfe on 17.02.14.
  */
-package app.appMvc.model.tool {
+package app.appMvc.model.tool.vo {
 import flash.events.Event;
 
 public class ToolEvent extends Event{

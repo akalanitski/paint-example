@@ -3,6 +3,15 @@
  */
 package app.appMvc.view.toolbar {
 
+import app.appMvc.model.tool.vo.ToolEllipse;
+import app.appMvc.model.tool.vo.ToolEraser;
+import app.appMvc.model.tool.vo.ToolHand;
+import app.appMvc.model.tool.vo.ToolLine;
+import app.appMvc.model.tool.vo.ToolPencil;
+import app.appMvc.model.tool.vo.ToolRectangle;
+import app.appMvc.model.tool.vo.ToolStencilBrush;
+import app.appMvc.model.tool.vo.ToolText;
+
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -11,21 +20,12 @@ import flash.text.TextFormat;
 
 public class Toolbar extends Sprite {
 
-    public static const TOOL_PANCIL:String = "pancil";
-    public static const TOOL_BRUSH:String = "Brush";
-    public static const TOOL_SQUARE:String = "Square";
-    public static const TOOL_HAND:String = "Hand";
-    public static const TOOL_LINE:String = "Line";
-    public static const TOOL_ELLIPSE:String = "Ellipse";
-    public static const TOOL_TEXT:String = "Text";
-    public static const TOOL_ERASER:String = "Eraser";
-    public static const TOOL_CLEAR:String = "Clear";
-
     public static const CLICKED_BUTTON:String = "Clicked_Button";
 
     public var buttons:Vector.<Sprite> = new <Sprite>[];
 
     private var _selectedTool:String;
+    public static const BUTTON_CLEAR:String = "BUTTON_CLEAR";
 
     public function get selectedTool():String {
         return _selectedTool;
@@ -61,17 +61,22 @@ public class Toolbar extends Sprite {
             buttons[i].removeEventListener(MouseEvent.CLICK, handleButtonClick);
         }
     }
-    private function addButton(x:Number, y:Number, width:Number, height:Number, text:String, id:String):void {
+    private function addButton(x:Number, y:Number, width:Number, height:Number, text:String, name:String):void {
         var buttonSprite:Sprite = new Sprite();
+
         buttonSprite.x = x;
         buttonSprite.y = y;
+
         buttonSprite.graphics.beginFill(0x999999);
         buttonSprite.graphics.drawRect(0, 0, width, height);
         buttonSprite.graphics.endFill();
+
         buttonSprite.buttonMode = true;
         buttonSprite.useHandCursor = true;
         buttonSprite.mouseChildren = false;
-        buttonSprite.name = id;
+
+        buttonSprite.name = name;
+
         var tf:TextField = new TextField();
         tf.defaultTextFormat = new TextFormat("Arial", 11, 0x000000, "bold");
         tf.selectable = false;
@@ -99,23 +104,23 @@ public class Toolbar extends Sprite {
         var buttonWidth:int = 40;
         var buttonHeight:int = 20;
 
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Pencil", TOOL_PANCIL);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Pencil", ToolPencil.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Brush", TOOL_BRUSH);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Brush", ToolStencilBrush.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Square", TOOL_SQUARE);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Rectangle", ToolRectangle.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Hand", TOOL_HAND);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Hand", ToolHand.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Line", TOOL_LINE);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Line", ToolLine.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Ellipse", TOOL_ELLIPSE);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Ellipse", ToolEllipse.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Text", TOOL_TEXT);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Text", ToolText.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Eraser", TOOL_ERASER);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Eraser", ToolEraser.NAME);
         xPos += xGap + buttonWidth;
-        addButton(xPos, yPos, buttonWidth, buttonHeight, "Clear", TOOL_CLEAR);
+        addButton(xPos, yPos, buttonWidth, buttonHeight, "Clear", BUTTON_CLEAR);
     }
 
 }

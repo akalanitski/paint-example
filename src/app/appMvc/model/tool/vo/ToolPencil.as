@@ -5,7 +5,8 @@
  * Time: 10:56
  * To change this template use File | Settings | File Templates.
  */
-package app.appMvc.model.tool {
+package app.appMvc.model.tool.vo {
+import app.appMvc.model.tool.*;
 import app.S;
 
 import flash.display.Stage;
@@ -14,10 +15,8 @@ import flash.events.MouseEvent;
 
 public class ToolPencil extends Tool {
     public static const NAME:String = "ToolPencil";
-    override public function getName():String {
-        return NAME;
-    }
     public function ToolPencil() {super(NAME);}
+
     private var _prevX:Number;
     private var _prevY:Number;
 
@@ -47,16 +46,15 @@ public class ToolPencil extends Tool {
         if (isInUse) {
             useTool(e);
         }
-
-        function useTool(e:MouseEvent):void {
-            activeLayer.graphics.beginFill(0x000000, 1.0);
-            activeLayer.graphics.lineStyle(5, 0x000000, 1.0);
+    }
+    private function useTool(e:MouseEvent):void {
+        activeLayer.graphics.beginFill(0x000000, 1.0);
+        activeLayer.graphics.lineStyle(5, 0x000000, 1.0);
             activeLayer.graphics.moveTo(_prevX, _prevY);
             activeLayer.graphics.lineTo(relX, relY);
             _prevX = relX;
             _prevY = relY;
             activeLayer.graphics.endFill();
-        }
     }
 }
 }

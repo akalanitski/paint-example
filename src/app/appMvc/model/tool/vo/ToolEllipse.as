@@ -1,18 +1,20 @@
 /**
  * Created by cfe on 08.02.14.
  */
-package app.appMvc.model.tool {
+package app.appMvc.model.tool.vo {
+import app.appMvc.model.tool.*;
 
 import app.S;
+import app.appMvc.model.document.Layer;
 
 import flash.display.Graphics;
 import flash.display.Sprite;
 import flash.display.Stage;
 import flash.events.MouseEvent;
 
-public class ToolRectangle extends Tool {
-    public static const NAME:String = "ToolRectangle";
-    public function ToolRectangle() {super(NAME);}
+public class ToolEllipse extends Tool {
+    public static const NAME:String = "ToolEllipse";
+    public function ToolEllipse(){super(NAME);}
 
     private var _state:String;
     private const STATE_NONE:String = "STATE_NONE";
@@ -28,12 +30,12 @@ public class ToolRectangle extends Tool {
         else {isInUse = true;}
         _state = newState;
     }
-    override public function onRegister():void {
+    override public function init():void {
         S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER, true));
         activeLayer.addChild(_visualRepr);
         state = STATE_NONE;
     }
-    override public function onRemove():void {
+    override public function cleanup():void {
         activeLayer.removeChild(_visualRepr);
     }
     override protected function validateSettings():void {
@@ -71,7 +73,7 @@ public class ToolRectangle extends Tool {
                 case STATE_DRAWING:
                     _visualRepr.graphics.clear();
                     _visualRepr.graphics.beginFill(0x000000);
-                    _visualRepr.graphics.drawRect(_prevX, _prevY, relX - _prevX, relY - _prevY);
+                    _visualRepr.graphics.drawEllipse(_prevX, _prevY, relX - _prevX, relY - _prevY);
                     _visualRepr.graphics.endFill();
                     break;
             }

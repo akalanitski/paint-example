@@ -1,7 +1,8 @@
 /**
  * Created by cfe on 08.02.14.
  */
-package app.appMvc.model.tool {
+package app.appMvc.model.tool.vo {
+import app.appMvc.model.tool.*;
 
 import app.S;
 
@@ -46,7 +47,7 @@ public class ToolEraser extends Tool {
         isInUse = false;
     }
 
-    function useTool(e:MouseEvent):void {
+    private function useTool(e:MouseEvent):void {
         trace("eraser");
         _eraser.graphics.beginFill(0x000000, 1.0);
         _eraser.graphics.lineStyle(5, 0x000000, 1.0);

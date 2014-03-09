@@ -9,10 +9,12 @@ import flash.events.KeyboardEvent;
 
 import org.puremvc.as3.patterns.mediator.Mediator;
 
-// sends KeyUp KeyDown notifications
-public class KeyMediator extends Mediator{
-    public static const NAME:String = "KeyMediator";
-    public function KeyMediator() {
+/**
+ * Sends flash keyboardEvents as pureMVC notifications
+ */
+public class KeyNotifierMediator extends Mediator{
+    public static const NAME:String = "KeyNotifierMediator";
+    public function KeyNotifierMediator() {
     }
     private function handleKeyDown(keyEvent:KeyboardEvent):void {sendNotification(Notes.KEY_DOWN, keyEvent);}
     private function handleKeyUp(keyEvent:KeyboardEvent):void {sendNotification(Notes.KEY_UP, keyEvent);}

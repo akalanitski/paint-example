@@ -12,14 +12,14 @@ import app.appMvc.model.document.Layer;
 public class ApplicationSettingsVO {
     private var _frontColor:uint = 0x000000;
     private var _backColor:uint = 0xFFFFFF;
-    private var _appBackground:uint = 0x777777;
-    public var activeLayer:Layer;
-    public var activeDocument:Document;
+    private var _activeLayer:Layer = null;
+    private var _activeDocument:Document = null;
     private var _selectedLayers:Vector.<Layer>;
     public function ApplicationSettingsVO() {}
 
     public function get frontColor():uint {return _frontColor;}
     public function set frontColor(rgb:uint):void {_frontColor = rgb;}
+
     public function get backColor():uint {return _backColor;}
     public function set backColor(rgb:uint):void {_backColor = rgb;}
 
@@ -28,5 +28,12 @@ public class ApplicationSettingsVO {
         frontColor = backColor;
         backColor = frontColorBuffer;
     }
+
+    public function get activeLayer():Layer {return _activeLayer;}
+    public function set activeLayer(layer:Layer):void {_activeLayer = layer;}
+
+    public function get activeDocument():Document {return _activeDocument;}
+    public function set activeDocument(doc:Document):void {_activeDocument = doc;}
+
 }
 }

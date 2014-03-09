@@ -26,9 +26,15 @@ public class Notes {
     public static const MAIN_WINDOW_MOUSE_MOVE:String = "MAIN_WINDOW_MOUSE_MOVE";
     public static const MAIN_WINDOW_MOUSE_UP:String = "MAIN_WINDOW_MOUSE_UP";
 
-    public static const PUSH_DOC_ORIGIN_COORDINATES_COMMAND:String = "PUSH_DOC_ORIGIN_COORDINATES_COMMAND";
     public static const PUSH_DOC_RELATIVE_MOUSE_COORDINATES_COMMAND:String = "PUSH_DOC_RELATIVE_MOUSE_COORDINATES_COMMAND";
-    public static const PUSH_ACTIVE_DOCUMENT_COMMAND:String = "PUSH_ACTIVE_DOCUMENT_COMMAND";
-    public static const PUSH_ACTIVE_LAYER_COMMAND:String = "PULL_ACTIVE_LAYER_COMMAND";
+
+    public static const ACTIVE_DOCUMENT_CHANGED:String = "ACTIVE_DOCUMENT_CHANGED";
+    public static const ACTIVE_LAYER_CHANGED:String = "ACTIVE_LAYER_CHANGED";
+    public static const FRONT_COLOR_CHANGED:String = "FRONT_COLOR_CHANGE";
+    public static const BACK_COLOR_CHANGED:String = "BACK_COLOR_CHANGE";
+
+    public static const DOCUMENT_OY_CHANGED:String = "DOCUMENT_OY_CHANGED";
+    public static const DOCUMENT_OX_CHANGED:String = "DOCUMENT_OX_CHANGED";
+
 }
 }

@@ -7,15 +7,15 @@
  */
 package app.appMvc.controller {
 import app.appMvc.Notes;
-import app.appMvc.model.appManager.AppManagerMediator;
-import app.appMvc.model.appManager.AppManagerProxy;
+import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.document.DocumentProxy;
 import app.appMvc.model.tool.ToolMediator;
-import app.appMvc.view.KeyMediator;
-import app.appMvc.view.MouseMediator;
+import app.appMvc.model.tool.ToolProxy;
+import app.appMvc.view.KeyNotifierMediator;
+import app.appMvc.view.MouseNotifierMediator;
 import app.appMvc.view.mainWindow.MainWindowMediator;
+import app.appMvc.view.mainWindow.MainWindowProxy;
 import app.appMvc.view.toolbar.ToolbarMediator;
-
-import flash.display.Stage;
 
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -23,28 +23,30 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
 public class StartupCommand extends SimpleCommand {
     override public function execute(note:INotification):void {
         // insert registerCommand()s here
-        facade.registerCommand(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND, PushDocOriginCoordinatesCommand);
-        facade.registerCommand(Notes.PUSH_ACTIVE_DOCUMENT_COMMAND, PushActiveDocumentCommand);
-        facade.registerCommand(Notes.PUSH_ACTIVE_LAYER_COMMAND, PushActiveLayerCommand);
-        facade.registerCommand(Notes.PUSH_DOC_RELATIVE_MOUSE_COORDINATES_COMMAND, PushDocRelativeMouseCoordinatesCommand);
         facade.registerCommand(Notes.SET_TOOL_COMMAND, SetToolCommand);
         //...
 
         // insert registerProxy()s here
-        facade.registerProxy(new AppManagerProxy());
+        facade.registerProxy(new DocumentProxy());
+        facade.registerProxy(new ApplicationSettingsProxy());
+        facade.registerProxy(new ToolProxy());
+        facade.registerProxy(new MainWindowProxy());
         //...
 
         // insert registerMediator()s here
-        facade.registerMediator(new AppManagerMediator());
-        facade.registerMediator(new KeyMediator());
-        facade.registerMediator(new MouseMediator());
+//        facade.registerMediator(new AppManagerMediator());
+        facade.registerMediator(new KeyNotifierMediator());
+        facade.registerMediator(new MouseNotifierMediator());
         facade.registerMediator(new ToolMediator());
         facade.registerMediator(new ToolbarMediator());
         facade.registerMediator(new MainWindowMediator());
         // ...
 
         // insert post actions here
+        var applicationSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
+        sendNotification(Notes.ACTIVE_LAYER_CHANGED, applicationSettingsProxy.getActiveLayer());
         // ...
+
 
         trace("executed StartupCommand");
     }

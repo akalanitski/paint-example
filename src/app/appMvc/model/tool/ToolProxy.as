@@ -1,39 +1,69 @@
 package app.appMvc.model.tool {
-import app.S;
 import app.appMvc.Notes;
-import app.appMvc.view.mainWindow.MainWindowMediator;
+import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.model.tool.vo.Tool;
+import app.appMvc.model.tool.vo.ToolEllipse;
+import app.appMvc.model.tool.vo.ToolEraser;
+import app.appMvc.model.tool.vo.ToolHand;
+import app.appMvc.model.tool.vo.ToolLine;
+import app.appMvc.model.tool.vo.ToolNone;
+import app.appMvc.model.tool.vo.ToolPencil;
+import app.appMvc.model.tool.vo.ToolRectangle;
+import app.appMvc.model.tool.vo.ToolStencilBrush;
+import app.appMvc.model.tool.vo.ToolText;
 
 import org.puremvc.as3.patterns.proxy.Proxy;
 
 public class ToolProxy extends Proxy {
     public static const NAME:String = "ToolProxy";
-    public function ToolProxy() {super(NAME, new ToolPencil());}
+    public function ToolProxy() {
+        super(NAME, new ToolNone());
+    }
     public function get currentTool():Tool {return data as Tool;}
     public function set currentTool(tool:Tool):void {
-        currentTool.onRemove();
+        currentTool.cleanup();
         data = tool;
-        tool.onRegister();
+        currentTool.init();
     }
+    public function setCurrentTool(toolName:String):void {
+        if (currentTool.getName() == toolName || currentTool.isInUse) {
+            return;
+        }
 
+        switch (toolName) {
+            case ToolHand.NAME:
+                currentTool = new ToolHand();
+                break;
+            case ToolPencil.NAME:
+                currentTool = new ToolPencil();
+                break;
+            case ToolStencilBrush.NAME:
+                currentTool = new ToolStencilBrush();
+                break;
+            case ToolRectangle.NAME:
+                currentTool = new ToolRectangle();
+                break;
+            case ToolLine.NAME:
+                currentTool = new ToolLine();
+                break;
+            case ToolEraser.NAME:
+                currentTool = new ToolEraser();
+                break;
+            case ToolEllipse.NAME:
+                currentTool = new ToolEllipse();
+                break;
+            case ToolText.NAME:
+                currentTool = new ToolText();
+                break;
+            default:
+                trace("no such tool.");
+                break;
+        }
+    }
     override public function onRegister():void {
-        S.stage.addEventListener(ToolEvent.PULL_DOC_ORIGIN_COORDINATES, handlePullDocOriginCoordinates,false, 0, true);
-        S.stage.addEventListener(ToolEvent.PUSH_DOC_ORIGIN_COORDINATES, handlePushDocOriginCoordinates, false, 0 , true);
-        S.stage.addEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer, false, 0 , true);
+        setCurrentTool(ToolNone.NAME);
     }
     override public function onRemove():void {
-        S.stage.removeEventListener(ToolEvent.PULL_DOC_ORIGIN_COORDINATES, handlePullDocOriginCoordinates);
-        S.stage.removeEventListener(ToolEvent.PUSH_DOC_ORIGIN_COORDINATES, handlePushDocOriginCoordinates);
-        S.stage.removeEventListener(ToolEvent.UPDATE_ACTIVE_LAYER, handleUpdateActiveLayer);
-    }
-
-    private function handleUpdateActiveLayer(e:ToolEvent):void {
-        sendNotification(Notes.PUSH_ACTIVE_LAYER_COMMAND, null, ToolProxy.NAME);
-    }
-    private function handlePushDocOriginCoordinates(e:ToolEvent):void {
-        sendNotification(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND,{docOx:currentTool.docOx,docOy:currentTool.docOy},MainWindowMediator.NAME);
-    }
-    private function handlePullDocOriginCoordinates(e:ToolEvent):void {
-        sendNotification(Notes.PUSH_DOC_ORIGIN_COORDINATES_COMMAND, null, ToolProxy.NAME);
     }
 }
 }

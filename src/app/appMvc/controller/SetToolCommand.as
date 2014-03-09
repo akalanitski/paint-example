@@ -1,15 +1,15 @@
 package app.appMvc.controller {
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
-import app.appMvc.model.tool.Tool;
-import app.appMvc.model.tool.ToolEllipse;
-import app.appMvc.model.tool.ToolEraser;
-import app.appMvc.model.tool.ToolHand;
-import app.appMvc.model.tool.ToolLine;
-import app.appMvc.model.tool.ToolPencil;
+import app.appMvc.model.tool.vo.Tool;
+import app.appMvc.model.tool.vo.ToolEllipse;
+import app.appMvc.model.tool.vo.ToolEraser;
+import app.appMvc.model.tool.vo.ToolHand;
+import app.appMvc.model.tool.vo.ToolLine;
+import app.appMvc.model.tool.vo.ToolPencil;
 import app.appMvc.model.tool.ToolProxy;
-import app.appMvc.model.tool.ToolRectangle;
-import app.appMvc.model.tool.ToolStencilBrush;
-import app.appMvc.model.tool.ToolText;
+import app.appMvc.model.tool.vo.ToolRectangle;
+import app.appMvc.model.tool.vo.ToolStencilBrush;
+import app.appMvc.model.tool.vo.ToolText;
 
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -24,8 +24,6 @@ public class SetToolCommand extends SimpleCommand {
             return;
         }
 
-        toolProxy.currentTool = note.getBody() as Tool;
-        toolProxy.currentTool.activeLayer = ApplicationSettingsProxy.settings.activeLayer;
         switch (toolName) {
             case ToolHand.NAME:
                 toolProxy.currentTool = new ToolHand();

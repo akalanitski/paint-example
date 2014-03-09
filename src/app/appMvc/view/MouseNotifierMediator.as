@@ -9,9 +9,12 @@ import flash.events.MouseEvent;
 
 import org.puremvc.as3.patterns.mediator.Mediator;
 
-public class MouseMediator extends Mediator {
-    private static const NAME:String = "MouseMediator";
-    public function MouseMediator() {super(NAME);}
+/**
+ * Sends flash mouseEvents as pureMVC Notifications
+ */
+public class MouseNotifierMediator extends Mediator {
+    private static const NAME:String = "MouseNotifierMediator";
+    public function MouseNotifierMediator() {super(NAME);}
 
     private function handleMouseDown(event:MouseEvent):void {sendNotification(Notes.MOUSE_DOWN, event);}
     private function handleMouseUp(event:MouseEvent):void {sendNotification(Notes.MOUSE_UP, event);}

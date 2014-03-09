@@ -1,7 +1,8 @@
 /**
  * Created by cfe on 08.02.14.
  */
-package app.appMvc.model.tool {
+package app.appMvc.model.tool.vo {
+import app.appMvc.model.tool.*;
 
 import app.S;
 
@@ -30,13 +31,13 @@ public class ToolText extends Tool {
         }
     }
 
-    override public function onRegister():void {
+    override public function init():void {
         setState(new Event(StateNone.NAME, true));
         S.stage.addEventListener(StateNone.NAME, setState, false, 0, true);
         S.stage.addEventListener(StateTyping.NAME, setState, false, 0, true);
     }
 
-    override public function onRemove():void {
+    override public function cleanup():void {
         setState(new Event(StateNone.NAME, true));
         S.stage.removeEventListener(StateNone.NAME, setState);
         S.stage.removeEventListener(StateTyping.NAME, setState);
@@ -51,8 +52,8 @@ public class ToolText extends Tool {
 }
 
 import app.S;
-import app.appMvc.model.tool.ToolEvent;
-import app.appMvc.model.tool.ToolText;
+import app.appMvc.model.tool.vo.ToolEvent;
+import app.appMvc.model.tool.vo.ToolText;
 
 import flash.events.Event;
 import flash.text.TextField;

@@ -12,11 +12,14 @@ import flash.events.MouseEvent;
 // displays document contents on checker pattern with border, on top of one colored background
 // sends mouse events for using tool etc.
 public class MainWindow extends Sprite {
+    public static const DOC_OX_CHANGED:String = "DOC_OX_CHANGED";
+    public static const DOC_OY_CHANGED:String = "DOC_OY_CHANGED";
+    private var _backgroundColor:uint = 0x777777;
     private var _docBack:Sprite = new Sprite();
     private var _document:Document = null;
     function MainWindow(doc:Document) {
         addChildAt(_docBack, 0);
-        updateWindowBack();
+        updateWindowBackColor();
         setDocument(doc);
         centerDocumentView();
     }
@@ -45,7 +48,7 @@ public class MainWindow extends Sprite {
         S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_UP, e, true))
     }
     private function handleResize(e:Event):void {
-        updateWindowBack();
+        updateWindowBackColor();
         updateDocumentBack();
     }
 
@@ -62,14 +65,20 @@ public class MainWindow extends Sprite {
         }
     }
 
-    public function updateWindowBack(backColor:uint = 0x777777):void {
+    public function get backgroundColor():uint {return _backgroundColor;}
+    public function set backgroundColor(value:uint):void {
+        _backgroundColor = value;
+        updateWindowBackColor();
+    }
+
+    public function updateWindowBackColor():void {
         graphics.clear();
-        graphics.beginFill(backColor);
+        graphics.beginFill(_backgroundColor);
         graphics.drawRect(0, 0, S.stage.stageWidth, S.stage.stageHeight);
         graphics.endFill();
     }
 
-    public function updateDocumentBack(documentBorderColor:uint = 0x022222):void {
+    private function updateDocumentBack(documentBorderColor:uint = 0x022222):void {
         if (!_document) {
             _docBack.graphics.clear();
             return;
@@ -89,8 +98,15 @@ public class MainWindow extends Sprite {
     }
 
     public function get docOx():Number {return _docBack.x;}
-    public function set docOx(value:Number):void {_docBack.x = Math.round(value);}
+    public function set docOx(value:Number):void {
+        _docBack.x = Math.round(value);
+        dispatchEvent(new Event(DOC_OX_CHANGED, true));
+    }
+
     public function get docOy():Number {return _docBack.y;}
-    public function set docOy(value:Number):void {_docBack.y = Math.round(value);}
+    public function set docOy(value:Number):void {
+        _docBack.y = Math.round(value);
+        dispatchEvent(new Event(DOC_OY_CHANGED, true));
+    }
 }
 }

@@ -6,15 +6,15 @@ import app.S;
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 import app.appMvc.model.document.Layer;
-import app.appMvc.model.tool.Tool;
-import app.appMvc.model.tool.ToolEllipse;
-import app.appMvc.model.tool.ToolEraser;
-import app.appMvc.model.tool.ToolHand;
-import app.appMvc.model.tool.ToolLine;
-import app.appMvc.model.tool.ToolPencil;
-import app.appMvc.model.tool.ToolRectangle;
-import app.appMvc.model.tool.ToolStencilBrush;
-import app.appMvc.model.tool.ToolText;
+import app.appMvc.model.tool.vo.Tool;
+import app.appMvc.model.tool.vo.ToolEllipse;
+import app.appMvc.model.tool.vo.ToolEraser;
+import app.appMvc.model.tool.vo.ToolHand;
+import app.appMvc.model.tool.vo.ToolLine;
+import app.appMvc.model.tool.vo.ToolPencil;
+import app.appMvc.model.tool.vo.ToolRectangle;
+import app.appMvc.model.tool.vo.ToolStencilBrush;
+import app.appMvc.model.tool.vo.ToolText;
 
 import flash.display.Stage;
 import flash.events.Event;
@@ -52,43 +52,26 @@ public class ToolbarMediator extends Mediator {
     }
 
     private function handleClickedToolbarButton(e:Event):void {
-        var tool:Tool;
-        switch (toolbar.selectedTool) {
-            case Toolbar.TOOL_PANCIL:
-                tool = new ToolPencil();
+        switch (e.target.name) {
+            case ToolPencil.NAME:
+            case ToolRectangle.NAME:
+            case ToolText.NAME:
+            case ToolLine.NAME:
+            case ToolStencilBrush.NAME:
+            case ToolHand.NAME:
+            case ToolEllipse.NAME:
+            case ToolEraser.NAME:
+                sendNotification(Notes.SET_TOOL_COMMAND, e.target.name);
                 break;
-            case toolbar.buttons[1]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolStencilBrush.NAME);
-                break;
-            case toolbar.buttons[2]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolRectangle.NAME);
-                break;
-            case toolbar.buttons[3]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolHand.NAME);
-                break;
-            case toolbar.buttons[4]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolLine.NAME);
-                break;
-            case toolbar.buttons[5]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolEllipse.NAME);
-                break;
-            case toolbar.buttons[6]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolText.NAME);
-                break;
-            case toolbar.buttons[7]:
-                sendNotification(Notes.SET_TOOL_COMMAND, ToolEraser.NAME);
-                break;
-            case toolbar.buttons[8]:
+
+            case Toolbar.BUTTON_CLEAR:
                 var appSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
-                    var activeLayer:Layer = appSettingsProxy.settings.activeLayer;
+                    var activeLayer:Layer = appSettingsProxy.getActiveLayer();
                     if (activeLayer){
                         activeLayer.clear();
                     }
                 break;
-
-
         }
-        sendNotification(Notes.SET_TOOL_COMMAND, tool);
     }
 }
 }

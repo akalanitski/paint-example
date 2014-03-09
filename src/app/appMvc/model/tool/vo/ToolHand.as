@@ -1,7 +1,8 @@
 /**
  * Created by cfe on 15.02.14.
  */
-package app.appMvc.model.tool {
+package app.appMvc.model.tool.vo {
+import app.appMvc.model.tool.*;
 import app.S;
 
 import flash.events.Event;
