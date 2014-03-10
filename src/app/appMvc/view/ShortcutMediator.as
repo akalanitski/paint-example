@@ -8,6 +8,9 @@ import org.puremvc.as3.interfaces.INotification;
 
 import org.puremvc.as3.patterns.mediator.Mediator;
 
+/**
+ * Sends notifications that other mediators listen to.
+ */
 public class ShortcutMediator extends Mediator {
     public static const NAME:String = "ShortcutMediator";
     public function ShortcutMediator() {super(NAME);}
@@ -30,6 +33,9 @@ public class ShortcutMediator extends Mediator {
 
                 switch (keyEvent.keyCode) {
                     case Keyboard.ESCAPE:
+                        break;
+                    case Keyboard.T:
+                        sendNotification(Notes.TOGGLE_TOOLBAR_VISIBILITY);
                         break;
                 }
                 break;

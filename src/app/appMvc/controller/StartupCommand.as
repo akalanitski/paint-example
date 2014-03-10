@@ -13,8 +13,10 @@ import app.appMvc.model.tool.ToolMediator;
 import app.appMvc.model.tool.ToolProxy;
 import app.appMvc.view.KeyNotifierMediator;
 import app.appMvc.view.MouseNotifierMediator;
+import app.appMvc.view.ShortcutMediator;
 import app.appMvc.view.mainWindow.MainWindowMediator;
 import app.appMvc.view.mainWindow.MainWindowProxy;
+import app.appMvc.view.mainWindow.vc.MainWindow;
 import app.appMvc.view.toolbar.ToolbarMediator;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -23,7 +25,6 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
 public class StartupCommand extends SimpleCommand {
     override public function execute(note:INotification):void {
         // insert registerCommand()s here
-        facade.registerCommand(Notes.SET_TOOL_COMMAND, SetToolCommand);
         //...
 
         // insert registerProxy()s here
@@ -34,17 +35,21 @@ public class StartupCommand extends SimpleCommand {
         //...
 
         // insert registerMediator()s here
-//        facade.registerMediator(new AppManagerMediator());
         facade.registerMediator(new KeyNotifierMediator());
         facade.registerMediator(new MouseNotifierMediator());
         facade.registerMediator(new ToolMediator());
         facade.registerMediator(new ToolbarMediator());
         facade.registerMediator(new MainWindowMediator());
+        facade.registerMediator(new ShortcutMediator());
         // ...
 
         // insert post actions here
+        // init
         var applicationSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
         sendNotification(Notes.ACTIVE_LAYER_CHANGED, applicationSettingsProxy.getActiveLayer());
+        var mainWindowProxy:MainWindowProxy = facade.retrieveProxy(MainWindowProxy.NAME) as MainWindowProxy;
+        sendNotification(Notes.DOCUMENT_OX_CHANGED, mainWindowProxy.docOx);
+        sendNotification(Notes.DOCUMENT_OY_CHANGED, mainWindowProxy.docOy);
         // ...
 
 

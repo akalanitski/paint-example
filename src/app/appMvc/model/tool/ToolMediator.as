@@ -1,8 +1,6 @@
 package app.appMvc.model.tool {
 import app.appMvc.Notes;
-import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 import app.appMvc.model.document.Layer;
-import app.appMvc.model.tool.vo.ToolEvent;
 
 import flash.events.MouseEvent;
 
@@ -24,6 +22,11 @@ public class ToolMediator extends Mediator {
             Notes.ACTIVE_LAYER_CHANGED,
             Notes.FRONT_COLOR_CHANGED,
 
+            Notes.DOCUMENT_OX_CHANGED,
+            Notes.DOCUMENT_OY_CHANGED,
+
+            Notes.RELATIVE_MOUSE_COORDINATES_CHANGED,
+
             Notes.MAIN_WINDOW_MOUSE_DOWN,
             Notes.MAIN_WINDOW_MOUSE_MOVE,
             Notes.MAIN_WINDOW_MOUSE_UP
@@ -32,26 +35,35 @@ public class ToolMediator extends Mediator {
 
     override public function handleNotification(note:INotification):void {
         switch (note.getName()) {
+
+            case Notes.RELATIVE_MOUSE_COORDINATES_CHANGED:
+                var n:Object = note.getBody() as Object;
+                _toolProxy.relX = n.relX as Number;
+                _toolProxy.relY = n.relY as Number;
+                break;
+
+            case Notes.DOCUMENT_OX_CHANGED:
+                _toolProxy.docOx = note.getBody() as Number;
+                break;
+
+            case Notes.DOCUMENT_OY_CHANGED:
+                _toolProxy.docOy = note.getBody() as Number;
+                break;
+
             case Notes.ACTIVE_LAYER_CHANGED:
-                _toolProxy.currentTool.activeLayer = note.getBody() as Layer;
+                _toolProxy.activeLayer = note.getBody() as Layer;
                 break;
 
             case Notes.MAIN_WINDOW_MOUSE_UP:
-                _toolProxy.currentTool.handleMouseUp(note.getBody() as MouseEvent);
+                _toolProxy.handleMouseUp(note.getBody() as MouseEvent);
                 break;
 
             case Notes.MAIN_WINDOW_MOUSE_DOWN:
-                try {
-                    _toolProxy.currentTool.handleMouseDown(note.getBody() as MouseEvent);
-                } catch (error:Error) {
-                    if (error.message == ToolEvent.ERROR_NULL_ACTIVE_LAYER) {
-                        trace("No active layer.");
-                    }
-                }
+                _toolProxy.handleMouseDown(note.getBody() as MouseEvent);
                 break;
 
             case Notes.MAIN_WINDOW_MOUSE_MOVE:
-                _toolProxy.currentTool.handleMouseMove(note.getBody() as MouseEvent);
+                _toolProxy.handleMouseMove(note.getBody() as MouseEvent);
                 break;
         }
     }

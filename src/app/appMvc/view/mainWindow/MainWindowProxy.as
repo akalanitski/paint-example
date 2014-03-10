@@ -1,6 +1,7 @@
 package app.appMvc.view.mainWindow {
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
+import app.appMvc.view.mainWindow.vc.MainWindow;
 
 import flash.events.Event;
 
@@ -33,9 +34,15 @@ public class MainWindowProxy extends Proxy {
     }
 
     public function get docOx():Number {return _mainWindow.docOx;}
-    public function set docOx(value:Number):void {_mainWindow.docOx = value;}
+    public function set docOx(value:Number):void {
+        _mainWindow.docOx = value;
+        sendNotification(Notes.DOCUMENT_OX_CHANGED, docOx);
+    }
 
     public function get docOy():Number {return _mainWindow.docOy;}
-    public function set docOy(value:Number):void {_mainWindow.docOx = value;}
+    public function set docOy(value:Number):void {
+        _mainWindow.docOy = value;
+        sendNotification(Notes.DOCUMENT_OY_CHANGED, docOy);
+    }
 }
 }

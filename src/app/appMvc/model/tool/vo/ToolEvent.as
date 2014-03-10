@@ -10,7 +10,7 @@ public class ToolEvent extends Event{
 
     // ToolHand settings from MainWindow
     public static const PULL_DOC_ORIGIN_COORDINATES:String = "PULL_DOC_ORIGIN_COORDINATES";
-    public static const PUSH_DOC_ORIGIN_COORDINATES:String = "PUSH_DOC_ORIGIN_COORDINATES";
+    public static const CHANGE_DOC_ORIGIN_COORDINATES:String = "CHANGE_DOC_ORIGIN_COORDINATES";
 
     public function ToolEvent(type:String,bubbles:Boolean = false,cancelable:Boolean = false){
         super(type,bubbles,cancelable);

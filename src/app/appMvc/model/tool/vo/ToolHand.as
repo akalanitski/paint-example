@@ -31,7 +31,7 @@ public class ToolHand extends Tool {
     private function useTool(e:MouseEvent):void {
         docOx = e.stageX - _prevMouseX + _prevDocOx;
         docOy = e.stageY - _prevMouseY + _prevDocOy;
-        S.stage.dispatchEvent(new ToolEvent(ToolEvent.PUSH_DOC_ORIGIN_COORDINATES, true));
+        S.stage.dispatchEvent(new ToolEvent(ToolEvent.CHANGE_DOC_ORIGIN_COORDINATES, true));
     }
     override public function handleMouseUp(e:MouseEvent):void {isInUse = false;}
 }

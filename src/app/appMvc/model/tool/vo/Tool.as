@@ -19,24 +19,32 @@ public class Tool {
     function Tool(toolName:String) {_toolName = toolName;}
 
     private var _isInUse:Boolean = false;
-    private static var _commonSettings:ToolCommonSettings = new ToolCommonSettings();
 
-    public function getName():String {return _toolName;}
-
-    public function  get activeLayer():Layer {return _commonSettings.activeLayer;}
-    public function  set activeLayer(layer:Layer):void { _commonSettings.activeLayer = layer;}
+    private static var _activeLayer:Layer = null;
 
     // document origin coordinates on stage
-    public function  get docOx():Number {return _commonSettings.docOx;}
-    public function  set docOx(value:Number):void { _commonSettings.docOx = value;}
-    public function  get docOy():Number {return _commonSettings.docOy;}
-    public function  set docOy(value:Number):void { _commonSettings.docOy = value;}
+    private static var _docOx:Number = 0.0;
+    private static var _docOy:Number = 0.0;
 
     // relative document mouse coordinates
-    public function  get relX():Number {return _commonSettings.relX;}
-    public function  set relX(value:Number):void { _commonSettings.relX = value;}
-    public function  get relY():Number {return _commonSettings.relY;}
-    public function  set relY(value:Number):void { _commonSettings.relY = value;}
+    private static var _relX:Number = 0.0;
+    private static var _relY:Number = 0.0;
+
+    public function get name():String {return _toolName;}
+    public function  get activeLayer():Layer {return _activeLayer;}
+    public function  set activeLayer(layer:Layer):void { _activeLayer = layer;}
+
+    // document origin coordinates on stage
+    public function  get docOx():Number {return _docOx;}
+    public function  set docOx(value:Number):void { _docOx = value;}
+    public function  get docOy():Number {return _docOy;}
+    public function  set docOy(value:Number):void { _docOy = value;}
+
+    // relative document mouse coordinates
+    public function  get relX():Number {return _relX;}
+    public function  set relX(value:Number):void {_relX = value;}
+    public function  get relY():Number {return _relY;}
+    public function  set relY(value:Number):void {_relY = value;}
 
     public function init():void {}
     public function cleanup():void {}

@@ -91,7 +91,6 @@ public class Toolbar extends Sprite {
 
     private function handleButtonClick(e:MouseEvent):void {
         var clickedButton:Sprite = e.currentTarget as Sprite;
-        _selectedTool = clickedButton.name;
         clickedButton.dispatchEvent(new Event(CLICKED_BUTTON, true, true));
     }
 

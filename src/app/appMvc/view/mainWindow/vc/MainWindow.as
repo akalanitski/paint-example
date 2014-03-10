@@ -1,7 +1,8 @@
 /**
  * Created by cfe on 20.02.14.
  */
-package app.appMvc.view.mainWindow {
+package app.appMvc.view.mainWindow.vc {
+import app.appMvc.view.mainWindow.*;
 import app.S;
 import app.appMvc.model.document.Document;
 
@@ -14,6 +15,7 @@ import flash.events.MouseEvent;
 public class MainWindow extends Sprite {
     public static const DOC_OX_CHANGED:String = "DOC_OX_CHANGED";
     public static const DOC_OY_CHANGED:String = "DOC_OY_CHANGED";
+
     private var _backgroundColor:uint = 0x777777;
     private var _docBack:Sprite = new Sprite();
     private var _document:Document = null;
@@ -27,25 +29,25 @@ public class MainWindow extends Sprite {
     public function addListeners():void {
         S.stage.addEventListener(Event.RESIZE, handleResize, false, 0, true);
 
-        S.stage.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
-        S.stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp, false, 0, true);
-        S.stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove, false, 0, true);
+        addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
+        addEventListener(MouseEvent.MOUSE_UP, handleMouseUp, false, 0, true);
+        addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove, false, 0, true);
     }
     public function removeListeners():void {
         S.stage.removeEventListener(Event.RESIZE, handleResize);
 
-        S.stage.removeEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
-        S.stage.removeEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
-        S.stage.removeEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
+        removeEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
+        removeEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
+        removeEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
     }
     private function handleMouseDown(e:MouseEvent):void {
-        S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_DOWN, e, true));
+        dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_DOWN, e, true));
     }
     private function handleMouseMove(e:MouseEvent):void {
-        S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_MOVE, e, true));
+        dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_MOVE, e, true));
     }
     private function handleMouseUp(e:MouseEvent):void {
-        S.stage.dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_UP, e, true))
+        dispatchEvent(new MainWindowEvent(MainWindowEvent.MOUSE_UP, e, true))
     }
     private function handleResize(e:Event):void {
         updateWindowBackColor();
@@ -95,18 +97,18 @@ public class MainWindow extends Sprite {
             docOx = S.stage.stageWidth / 2.0 - _docBack.width / 2.0;
             docOy = S.stage.stageHeight / 2.0 - _docBack.height / 2.0;
         }
+        dispatchEvent(new Event(DOC_OX_CHANGED, true));
+        dispatchEvent(new Event(DOC_OY_CHANGED, true));
     }
 
     public function get docOx():Number {return _docBack.x;}
     public function set docOx(value:Number):void {
         _docBack.x = Math.round(value);
-        dispatchEvent(new Event(DOC_OX_CHANGED, true));
     }
 
     public function get docOy():Number {return _docBack.y;}
     public function set docOy(value:Number):void {
         _docBack.y = Math.round(value);
-        dispatchEvent(new Event(DOC_OY_CHANGED, true));
     }
 }
 }

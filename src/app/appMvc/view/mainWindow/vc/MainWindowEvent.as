@@ -1,7 +1,7 @@
 /**
  * Created by cfe on 21.02.14.
  */
-package app.appMvc.view.mainWindow {
+package app.appMvc.view.mainWindow.vc {
 import flash.events.Event;
 
 public class MainWindowEvent extends Event {

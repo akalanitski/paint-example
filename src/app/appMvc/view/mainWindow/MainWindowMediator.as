@@ -3,6 +3,8 @@ import app.S;
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
 import app.appMvc.model.tool.ToolProxy;
+import app.appMvc.view.mainWindow.vc.MainWindow;
+import app.appMvc.view.mainWindow.vc.MainWindowEvent;
 
 import flash.events.MouseEvent;
 
@@ -12,7 +14,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
 
 public class MainWindowMediator extends Mediator {
     public static const NAME:String = "MainWindowMediator";
-    public function get mainWindow():MainWindow {return viewComponent as MainWindow;}
+    private function get _mainWindow():MainWindow {return viewComponent as MainWindow;}
     public function MainWindowMediator() {
         super(NAME);
         var mainWindowProxy:MainWindowProxy = facade.retrieveProxy(MainWindowProxy.NAME) as MainWindowProxy;
@@ -27,41 +29,35 @@ public class MainWindowMediator extends Mediator {
     override public function handleNotification(note:INotification):void {
     }
     override public function onRegister():void {
-        S.stage.addChildAt(mainWindow, 0);
-        mainWindow.addListeners();
+        S.stage.addChildAt(_mainWindow, 0);
+        _mainWindow.addListeners();
 
-        S.stage.addEventListener(MainWindowEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
-        S.stage.addEventListener(MainWindowEvent.MOUSE_MOVE, handleMouseMove, false, 0, true);
-        S.stage.addEventListener(MainWindowEvent.MOUSE_UP, handleMouseUp, false, 0, true);
+        _mainWindow.addEventListener(MainWindowEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
+        _mainWindow.addEventListener(MainWindowEvent.MOUSE_MOVE, handleMouseMove, false, 0, true);
+        _mainWindow.addEventListener(MainWindowEvent.MOUSE_UP, handleMouseUp, false, 0, true);
     }
     override public function onRemove():void {
-        S.stage.removeChild(mainWindow);
-        mainWindow.removeListeners();
+        S.stage.removeChild(_mainWindow);
+        _mainWindow.removeListeners();
 
-        S.stage.removeEventListener(MainWindowEvent.MOUSE_DOWN, handleMouseDown);
-        S.stage.removeEventListener(MainWindowEvent.MOUSE_MOVE, handleMouseMove);
-        S.stage.removeEventListener(MainWindowEvent.MOUSE_UP, handleMouseUp);
+        _mainWindow.removeEventListener(MainWindowEvent.MOUSE_DOWN, handleMouseDown);
+        _mainWindow.removeEventListener(MainWindowEvent.MOUSE_MOVE, handleMouseMove);
+        _mainWindow.removeEventListener(MainWindowEvent.MOUSE_UP, handleMouseUp);
     }
 
     private function handleMouseDown(e:MainWindowEvent):void {
-        sendRelativeCoords(e.data as MouseEvent);
         sendNotification(Notes.MAIN_WINDOW_MOUSE_DOWN, e.data as MouseEvent);
     }
 
     private function handleMouseMove(e:MainWindowEvent):void {
-        sendRelativeCoords(e.data as MouseEvent);
+        var mE:MouseEvent = e.data as MouseEvent;
+        sendNotification(Notes.RELATIVE_MOUSE_COORDINATES_CHANGED,{
+                             relX: mE.stageX - _mainWindow.docOx,
+                             relY: mE.stageY - _mainWindow.docOy});
         sendNotification(Notes.MAIN_WINDOW_MOUSE_MOVE, e.data as MouseEvent);
     }
     private function handleMouseUp(e:MainWindowEvent):void {
-        sendRelativeCoords(e.data as MouseEvent);
         sendNotification(Notes.MAIN_WINDOW_MOUSE_UP, e.data as MouseEvent);
-    }
-    private function sendRelativeCoords(mE:MouseEvent):void {
-        sendNotification(
-                Notes.PUSH_DOC_RELATIVE_MOUSE_COORDINATES_COMMAND, {
-                    relX: mE.stageX - mainWindow.docOx,
-                    relY: mE.stageY - mainWindow.docOy},
-                ToolProxy.NAME);
     }
 }
 }
