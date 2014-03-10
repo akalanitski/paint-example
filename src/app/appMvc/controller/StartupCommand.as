@@ -52,7 +52,6 @@ public class StartupCommand extends SimpleCommand {
         sendNotification(Notes.DOCUMENT_OY_CHANGED, mainWindowProxy.docOy);
         // ...
 
-
         trace("executed StartupCommand");
     }
 }

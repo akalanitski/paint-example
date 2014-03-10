@@ -8,6 +8,5 @@ import flash.display.Stage;
 
 public class S {
     public static var stage:Stage;
-    public static var settings:ApplicationSettingsVO;
 }
 }
