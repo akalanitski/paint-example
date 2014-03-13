@@ -1,7 +1,7 @@
 /**
  * Created by cfe on 20.02.14.
  */
-package app.appMvc.view {
+package app.appMvc.view.mouseNotifier {
 import app.S;
 import app.appMvc.Notes;
 

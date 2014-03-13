@@ -1,7 +1,7 @@
 package app.appMvc.model.tool {
 import app.S;
 import app.appMvc.Notes;
-import app.appMvc.model.document.Layer;
+import app.appMvc.model.document.vo.Layer;
 import app.appMvc.model.tool.vo.Tool;
 import app.appMvc.model.tool.vo.ToolEllipse;
 import app.appMvc.model.tool.vo.ToolEraser;

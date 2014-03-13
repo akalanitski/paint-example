@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package app.appMvc.model.tool.vo {
-import app.appMvc.model.document.Layer;
+import app.appMvc.model.document.vo.Layer;
 
 import flash.events.MouseEvent;
 

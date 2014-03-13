@@ -5,7 +5,7 @@ package app.appMvc.view.toolbar {
 import app.S;
 import app.appMvc.Notes;
 import app.appMvc.model.applicationSettings.ApplicationSettingsProxy;
-import app.appMvc.model.document.Layer;
+import app.appMvc.model.document.vo.Layer;
 import app.appMvc.model.tool.ToolProxy;
 import app.appMvc.model.tool.vo.Tool;
 import app.appMvc.model.tool.vo.ToolEllipse;
@@ -16,6 +16,7 @@ import app.appMvc.model.tool.vo.ToolPencil;
 import app.appMvc.model.tool.vo.ToolRectangle;
 import app.appMvc.model.tool.vo.ToolStencilBrush;
 import app.appMvc.model.tool.vo.ToolText;
+import app.appMvc.view.toolbar.vc.Toolbar;
 
 import flash.display.Stage;
 import flash.events.Event;

@@ -1,7 +1,7 @@
 /**
  * Created by cfe on 16.02.14.
  */
-package app.appMvc.model.document {
+package app.appMvc.model.document.vo {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Graphics;

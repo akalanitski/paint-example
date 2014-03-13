@@ -1,6 +1,6 @@
 package app.appMvc.model.tool {
 import app.appMvc.Notes;
-import app.appMvc.model.document.Layer;
+import app.appMvc.model.document.vo.Layer;
 
 import flash.events.MouseEvent;
 

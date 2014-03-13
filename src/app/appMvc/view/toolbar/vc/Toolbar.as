@@ -1,7 +1,7 @@
 /**
  * Created by cfe on 11.02.14.
  */
-package app.appMvc.view.toolbar {
+package app.appMvc.view.toolbar.vc {
 
 import app.appMvc.model.tool.vo.ToolEllipse;
 import app.appMvc.model.tool.vo.ToolEraser;

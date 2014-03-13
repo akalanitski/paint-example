@@ -1,10 +1,10 @@
 /**
  * Created by cfe on 23.02.14.
  */
-package app.appMvc.view.layersWindow {
+package app.appMvc.view.layersWindow.vc {
 import app.S;
-import app.appMvc.model.document.Document;
-import app.appMvc.model.document.Layer;
+import app.appMvc.model.document.vo.Document;
+import app.appMvc.model.document.vo.Layer;
 
 import flash.display.Sprite;
 import flash.geom.Rectangle;

@@ -4,7 +4,7 @@
 package app.appMvc.view.mainWindow.vc {
 import app.appMvc.view.mainWindow.*;
 import app.S;
-import app.appMvc.model.document.Document;
+import app.appMvc.model.document.vo.Document;
 
 import flash.display.Sprite;
 import flash.events.Event;

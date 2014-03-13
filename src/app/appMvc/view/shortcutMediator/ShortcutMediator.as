@@ -1,4 +1,4 @@
-package app.appMvc.view {
+package app.appMvc.view.shortcutMediator {
 import app.appMvc.Notes;
 
 import flash.events.KeyboardEvent;

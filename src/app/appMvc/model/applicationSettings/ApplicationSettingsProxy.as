@@ -7,22 +7,23 @@
  */
 package app.appMvc.model.applicationSettings {
 import app.appMvc.Notes;
-import app.appMvc.model.document.Document;
+import app.appMvc.model.applicationSettings.vo.ApplicationSettings;
+import app.appMvc.model.document.vo.Document;
 import app.appMvc.model.document.DocumentProxy;
-import app.appMvc.model.document.Layer;
+import app.appMvc.model.document.vo.Layer;
 
 import org.puremvc.as3.patterns.proxy.Proxy;
 
 public class ApplicationSettingsProxy extends Proxy {
     public static const NAME:String = "ApplicationSettingsProxy";
     public function ApplicationSettingsProxy() {
-        super(NAME, new ApplicationSettingsVO());
+        super(NAME, new ApplicationSettings());
         var documentProxy:DocumentProxy = facade.retrieveProxy(DocumentProxy.NAME) as DocumentProxy;
         setActiveDocument(documentProxy.documents[0]);
         setActiveLayer(documentProxy.documents[0].layers[0]);
     }
 
-    private function get _settings():ApplicationSettingsVO {return data as ApplicationSettingsVO;}
+    private function get _settings():ApplicationSettings {return data as ApplicationSettings;}
 
     public function setActiveDocument(doc:Document):void {
         if (doc != _settings.activeDocument) {
@@ -60,7 +61,7 @@ public class ApplicationSettingsProxy extends Proxy {
     public function setBackColor(rgb:uint):void {
         if (rgb != _settings.backColor) {
             _settings.backColor = rgb;
-            sendNotification(Notes.FRONT_COLOR_CHANGED, _settings.backColor)
+            sendNotification(Notes.BACK_COLOR_CHANGED, _settings.backColor)
         }
     }
 
@@ -71,6 +72,5 @@ public class ApplicationSettingsProxy extends Proxy {
             sendNotification(Notes.BACK_COLOR_CHANGED, _settings.backColor);
         }
     }
-
 }
 }

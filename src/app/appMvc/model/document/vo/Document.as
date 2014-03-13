@@ -1,7 +1,7 @@
 /**
  * Created by cfe on 16.02.14.
  */
-package app.appMvc.model.document {
+package app.appMvc.model.document.vo {
 import flash.display.Sprite;
 import flash.geom.Rectangle;
 

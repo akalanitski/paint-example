@@ -2,7 +2,7 @@
  * Created by cfe on 20.02.14.
  */
 package app {
-import app.appMvc.model.applicationSettings.ApplicationSettingsVO;
+import app.appMvc.model.applicationSettings.vo.ApplicationSettings;
 
 import flash.display.Stage;
 
