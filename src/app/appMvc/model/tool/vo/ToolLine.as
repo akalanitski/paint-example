@@ -2,90 +2,93 @@
  * Created by cfe on 08.02.14.
  */
 package app.appMvc.model.tool.vo {
-import app.appMvc.model.tool.*;
-
-import app.S;
-
-import flash.display.Graphics;
-import flash.display.Sprite;
-import flash.display.Stage;
-import flash.events.KeyboardEvent;
-import flash.events.MouseEvent;
-import flash.ui.Keyboard;
-
 public class ToolLine extends Tool {
     public static const NAME:String = "ToolLine";
     public function ToolLine() {super(NAME);}
 
-    private var _state:String = STATE_NONE;
-    public static const STATE_NONE:String = "STATE_NONE";
-    public static const STATE_DRAWING:String = "STATE_DRAWING";
-
-    private var _visualRepr:Sprite = new Sprite();
-    private var  _prevX:Number;
-    private var  _prevY:Number;
-
-    private function get state():String {return _state;}
-    private function set state(newState:String):void {
-        if (newState == STATE_NONE){isInUse = false;}
-        else {isInUse = true;}
-        _state = newState;
+    override public function initTool():void {
+        setState(StateNone.NAME);
+    }
+    override public function cleanupTool():void {
+        setState(StateNone.NAME);
     }
 
-    override public function init():void {
-        S.stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
-        S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER, true));
-        activeLayer.addChild(_visualRepr);
-    }
-    override public function cleanup():void {
-        S.stage.removeEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
-        activeLayer.removeChild(_visualRepr);
-    }
-    private function handleKeyUp(e:KeyboardEvent):void {
-        switch (e.keyCode) {
-            case Keyboard.ESCAPE:
-                _visualRepr.graphics.clear();
-                state = STATE_NONE;
+    override public function setState(stateName:String):void {
+        if (stateName == state.name) {
+            return;
+        }
+        state.cleanupState();
+        switch (stateName) {
+            case StateNone.NAME:
+                _state = new StateNone(this);
+                break;
+            case StateDrawing.NAME:
+                _state = new StateDrawing(this);
                 break;
         }
+        state.initState();
     }
-    override protected function updateSettings():void {
-        S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER, true));
+}
+}
+
+import app.appMvc.model.tool.vo.Tool;
+import app.appMvc.model.tool.vo.ToolState;
+
+import flash.display.Sprite;
+import flash.events.MouseEvent;
+
+class StateNone extends ToolState{
+    public static const NAME:String = "StateNone";
+    function StateNone(curTool:Tool){super(NAME,curTool);}
+
+    override public function initState():void {
+        tool.isInUse = false;
     }
-    override protected function validateSettings():void {
-        if (!activeLayer) {
-            throw(ToolEvent.ERROR_NULL_ACTIVE_LAYER);
-        }
+    override public function handleMouseDown(e:MouseEvent):void {
+        tool.setState(StateDrawing.NAME);
+        tool.state.handleMouseDown(e);
     }
-    override protected function postMouseDown(e:MouseEvent):void {
-        _prevX = relX;
-        _prevY = relY;
-        state = STATE_DRAWING;
+}
+
+class StateDrawing extends ToolState{
+    public static const NAME:String = "StateDrawing";
+    function StateDrawing(curTool:Tool){super(NAME,curTool);}
+
+    private var _visualRepr:Sprite = new Sprite();
+    private var _prevX:Number;
+    private var _prevY:Number;
+
+    override public function initState():void {
+        tool.activeLayer.addChild(_visualRepr);
+    }
+    override public function cleanupState():void {
+        tool.activeLayer.removeChild(_visualRepr);
     }
 
-    override public function handleMouseUp(e:MouseEvent):void {
-        activeLayer.graphics.drawGraphicsData(_visualRepr.graphics.readGraphicsData(true));
-        _visualRepr.graphics.clear();
-        state = STATE_NONE;
+    override public function handleMouseDown(e:MouseEvent):void {
+        tool.isInUse = true;
+        _prevX = tool.relX;
+        _prevY = tool.relY;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (isInUse) {
-            switch (_state) {
-                case STATE_NONE:
-                    break;
-
-                case STATE_DRAWING:
-                    // draw visual line from mouseDown to mouseMove
-                    _visualRepr.graphics.clear();
-                    _visualRepr.graphics.beginFill(0x000000, 0.0);
-                    _visualRepr.graphics.lineStyle(3, 0x000000, 1.0);
-                    _visualRepr.graphics.moveTo(_prevX, _prevY);
-                    _visualRepr.graphics.lineTo(relX, relY);
-                    _visualRepr.graphics.endFill();
-                    break;
-            }
+        if (tool.isInUse) {
+             // draw visual line from mouseDown to mouseMove
+            _visualRepr.graphics.clear();
+            _visualRepr.graphics.beginFill(0x000000, 0.0);
+            _visualRepr.graphics.lineStyle(3, 0x000000, 1.0);
+            _visualRepr.graphics.moveTo(_prevX, _prevY);
+            _visualRepr.graphics.lineTo(tool.relX, tool.relY);
+            _visualRepr.graphics.endFill();
         }
     }
-}
+
+    override public function handleMouseUp(e:MouseEvent):void {
+        tool.isInUse = false;
+        // copy line graphics to active layer
+        tool.activeLayer.graphics.drawGraphicsData(_visualRepr.graphics.readGraphicsData(true));
+        _visualRepr.graphics.clear();
+
+        tool.setState(StateNone.NAME);
+    }
 }

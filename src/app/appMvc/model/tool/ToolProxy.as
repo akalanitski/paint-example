@@ -34,11 +34,11 @@ public class ToolProxy extends Proxy {
     private function get _currentTool():Tool {return data as Tool;}
 
     override public function onRegister():void {
-        S.stage.addEventListener(ToolEvent.CHANGE_DOC_ORIGIN_COORDINATES, handleChangeDocOxy, false, 0, true);
+        S.stage.addEventListener(ToolEvent.UPDATE_DOC_ORIGIN_COORDINATES, handleChangeDocOxy, false, 0, true);
     }
 
     override public function onRemove():void {
-        S.stage.removeEventListener(ToolEvent.CHANGE_DOC_ORIGIN_COORDINATES, handleChangeDocOxy);
+        S.stage.removeEventListener(ToolEvent.UPDATE_DOC_ORIGIN_COORDINATES, handleChangeDocOxy);
     }
     private function handleChangeDocOxy(e:ToolEvent):void {
         var mainWindowProxy:MainWindowProxy = facade.retrieveProxy(MainWindowProxy.NAME) as MainWindowProxy;
@@ -59,7 +59,7 @@ public class ToolProxy extends Proxy {
         if (_currentTool.name == toolName || _currentTool.isInUse) {
             return;
         }
-        _currentTool.cleanup();
+        _currentTool.cleanupTool();
         switch (toolName) {
             case ToolHand.NAME:
                 data = new ToolHand();
@@ -89,7 +89,7 @@ public class ToolProxy extends Proxy {
                 trace("no such tool.");
                 break;
         }
-        _currentTool.init();
+        _currentTool.initTool();
         sendNotification(Notes.CURRENT_TOOL_CHANGED,currentToolName);
     }
 }

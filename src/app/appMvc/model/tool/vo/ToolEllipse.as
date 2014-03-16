@@ -2,82 +2,95 @@
  * Created by cfe on 08.02.14.
  */
 package app.appMvc.model.tool.vo {
-import app.appMvc.model.tool.*;
-
-import app.S;
-import app.appMvc.model.document.vo.Layer;
-
-import flash.display.Graphics;
-import flash.display.Sprite;
-import flash.display.Stage;
-import flash.events.MouseEvent;
 
 public class ToolEllipse extends Tool {
     public static const NAME:String = "ToolEllipse";
     public function ToolEllipse(){super(NAME);}
 
-    private var _state:String;
-    private const STATE_NONE:String = "STATE_NONE";
-    private const STATE_DRAWING:String = "STATE_DRAWING";
+    override public function initTool():void {
+        setState(StateNone.NAME);
+    }
+
+    override public function cleanupTool():void {
+        setState(StateNone.NAME);
+    }
+
+    override public function setState(stateName:String):void {
+        if (stateName == state.name) {
+            return;
+        }
+        state.cleanupState();
+        switch (stateName) {
+            case StateNone.NAME:
+                _state = new StateNone(this);
+                break;
+            case StateDrawing.NAME:
+                _state = new StateDrawing(this);
+                break;
+        }
+        state.initState();
+    }
+}
+}
+
+import app.appMvc.model.tool.vo.Tool;
+import app.appMvc.model.tool.vo.ToolState;
+
+import flash.display.Sprite;
+
+import flash.events.MouseEvent;
+
+class StateNone extends ToolState{
+    public static const NAME:String = "StateNone";
+    function StateNone(curTool:Tool){super(NAME,curTool);}
+
+    override public function initState():void {
+        tool.isInUse = false;
+    }
+    override public function handleMouseDown(e:MouseEvent):void {
+        tool.setState(StateDrawing.NAME);
+        tool.state.handleMouseDown(e);
+    }
+}
+
+class StateDrawing extends ToolState{
+    public static const NAME:String = "StateDrawing";
+    function StateDrawing(curTool:Tool){super(NAME,curTool);}
 
     private var _visualRepr:Sprite = new Sprite();
     private var _prevX:Number;
     private var _prevY:Number;
 
-    private function get state():String{return  _state;}
-    private function set state(newState:String):void {
-        if (newState == STATE_NONE){isInUse = false;}
-        else {isInUse = true;}
-        _state = newState;
+    override public function initState():void {
+        tool.activeLayer.addChild(_visualRepr);
     }
-    override public function init():void {
-        S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER, true));
-        activeLayer.addChild(_visualRepr);
-        state = STATE_NONE;
-    }
-    override public function cleanup():void {
-        activeLayer.removeChild(_visualRepr);
-    }
-    override protected function validateSettings():void {
-        if(!activeLayer) {
-            throw(ToolEvent.ERROR_NULL_ACTIVE_LAYER);
-        }
-    }
-    override protected function updateSettings():void {
-        S.stage.dispatchEvent(new ToolEvent(ToolEvent.UPDATE_ACTIVE_LAYER, true));
-    }
-    override protected function postMouseDown(e:MouseEvent):void {
-        switch (state){
-            case STATE_NONE:
-                state = STATE_DRAWING;
-                break;
-
-            case STATE_DRAWING:
-                break;
-        }
-        _prevX = relX;
-        _prevY = relY;
-        state = STATE_DRAWING;
+    override public function cleanupState():void {
+        tool.activeLayer.removeChild(_visualRepr);
     }
 
-    override public function handleMouseUp(e:MouseEvent):void {
-        // apply visual line to active layer
-        activeLayer.graphics.drawGraphicsData(_visualRepr.graphics.readGraphicsData(true));
-        _visualRepr.graphics.clear();
-        state = STATE_NONE;
+    override public function handleMouseDown(e:MouseEvent):void {
+        tool.isInUse = true;
+        _prevX = tool.relX;
+        _prevY = tool.relY;
     }
 
     override public function handleMouseMove(e:MouseEvent):void {
-        if (isInUse) {
-            switch (state){
-                case STATE_DRAWING:
-                    _visualRepr.graphics.clear();
-                    _visualRepr.graphics.beginFill(0x000000);
-                    _visualRepr.graphics.drawEllipse(_prevX, _prevY, relX - _prevX, relY - _prevY);
-                    _visualRepr.graphics.endFill();
-                    break;
+        if (tool.isInUse) {
+                _visualRepr.graphics.clear();
+                _visualRepr.graphics.beginFill(0x000000);
+                _visualRepr.graphics.drawEllipse(_prevX, _prevY,
+                                                 tool.relX - _prevX,
+                                                 tool.relY - _prevY);
+                _visualRepr.graphics.endFill();
             }
-        }
     }
-}
+
+    override public function handleMouseUp(e:MouseEvent):void {
+        tool.isInUse = false;
+        // copy line graphics to active layer
+        tool.activeLayer.graphics.drawGraphicsData(_visualRepr.graphics.readGraphicsData(true));
+        _visualRepr.graphics.clear();
+
+        tool.setState(StateNone.NAME);
+    }
 }

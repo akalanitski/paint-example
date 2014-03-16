@@ -15,57 +15,52 @@ import flash.events.MouseEvent;
  */
 
 public class Tool {
-    protected var _toolName:String;
-    function Tool(toolName:String) {_toolName = toolName;}
+    private var _toolName:String;
+    function Tool(toolName:String) {
+        _toolName = toolName;
+        _state = new ToolState(ToolState.NAME,this);
+    }
 
     private var _isInUse:Boolean = false;
 
-    private static var _activeLayer:Layer = null;
+    protected var _state:ToolState;
 
+    private static var _activeLayer:Layer = null;
     // document origin coordinates on stage
     private static var _docOx:Number = 0.0;
     private static var _docOy:Number = 0.0;
-
     // relative document mouse coordinates
+
     private static var _relX:Number = 0.0;
     private static var _relY:Number = 0.0;
 
-    public function get name():String {return _toolName;}
-    public function  get activeLayer():Layer {return _activeLayer;}
-    public function  set activeLayer(layer:Layer):void { _activeLayer = layer;}
+    public function initTool():void {}
+    public function cleanupTool():void {}
+
+    public final function get state():ToolState{return _state;}
+    public function setState(stateName:String):void {}
+
+    public final function get name():String {return _toolName;}
+    public final function  get activeLayer():Layer {return _activeLayer;}
+    public final function  set activeLayer(layer:Layer):void { _activeLayer = layer;}
 
     // document origin coordinates on stage
-    public function  get docOx():Number {return _docOx;}
-    public function  set docOx(value:Number):void { _docOx = value;}
-    public function  get docOy():Number {return _docOy;}
-    public function  set docOy(value:Number):void { _docOy = value;}
+    public final function  get docOx():Number {return _docOx;}
+    public final function  set docOx(value:Number):void { _docOx = value;}
+    public final function  get docOy():Number {return _docOy;}
+    public final function  set docOy(value:Number):void { _docOy = value;}
 
     // relative document mouse coordinates
-    public function  get relX():Number {return _relX;}
-    public function  set relX(value:Number):void {_relX = value;}
-    public function  get relY():Number {return _relY;}
-    public function  set relY(value:Number):void {_relY = value;}
+    public final function  get relX():Number {return _relX;}
+    public final function  set relX(value:Number):void {_relX = value;}
+    public final function  get relY():Number {return _relY;}
+    public final function  set relY(value:Number):void {_relY = value;}
 
-    public function init():void {}
-    public function cleanup():void {}
+    public final function get isInUse():Boolean {return _isInUse;}
+    public final function set isInUse(value:Boolean):void {_isInUse = value;}
 
-    public function get isInUse():Boolean {return _isInUse;}
-    public function set isInUse(value:Boolean):void {_isInUse = value;}
-
-    // sequence method
-    public final function handleMouseDown(e:MouseEvent):void {
-        updateSettings();
-        validateSettings();
-        postMouseDown(e);
-    }
-    // sends events to update settings
-    protected function updateSettings():void {}
-    // throws errors on wrong settings
-    protected function validateSettings():void {}
-    // called after updating and validating settings
-    protected function postMouseDown(e:MouseEvent):void {}
-
-    public function handleMouseUp(e:MouseEvent):void {}
-    public function handleMouseMove(e:MouseEvent):void {}
+    public final function handleMouseDown(e:MouseEvent):void {_state.handleMouseDown(e);}
+    public final function handleMouseMove(e:MouseEvent):void {_state.handleMouseMove(e);}
+    public final function handleMouseUp(e:MouseEvent):void {_state.handleMouseUp(e);}
 }
 }

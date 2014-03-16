@@ -44,7 +44,7 @@ public class StartupCommand extends SimpleCommand {
         // ...
 
         // insert post actions here
-        // init
+        // initTool
         var applicationSettingsProxy:ApplicationSettingsProxy = facade.retrieveProxy(ApplicationSettingsProxy.NAME) as ApplicationSettingsProxy;
         sendNotification(Notes.ACTIVE_LAYER_CHANGED, applicationSettingsProxy.getActiveLayer());
         var mainWindowProxy:MainWindowProxy = facade.retrieveProxy(MainWindowProxy.NAME) as MainWindowProxy;
