@@ -16,19 +16,14 @@ public class ToolEllipse extends Tool {
     }
 
     override public function setState(stateName:String):void {
-        if (stateName == state.name) {
-            return;
-        }
-        state.cleanupState();
         switch (stateName) {
             case StateNone.NAME:
-                _state = new StateNone(this);
+                state = new StateNone(this);
                 break;
             case StateDrawing.NAME:
-                _state = new StateDrawing(this);
+                state = new StateDrawing(this);
                 break;
         }
-        state.initState();
     }
 }
 }

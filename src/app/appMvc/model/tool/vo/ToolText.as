@@ -10,18 +10,14 @@ public class ToolText extends Tool {
     public function ToolText() {super(NAME);}
 
     override public function setState(stateName:String):void {
-        state.cleanupState();
-        if (stateName != state.name) {
-            switch (stateName) {
+        switch (stateName) {
+            case StateNone.NAME:
+                state = new StateNone(this);
+                break;
 
-                case StateNone.NAME:
-                    _state = new StateNone(this);
-                    break;
-
-                case StateTyping.NAME:
-                    _state = new StateTyping(this);
-                    break;
-            }
+            case StateTyping.NAME:
+                state = new StateTyping(this);
+                break;
         }
     }
 

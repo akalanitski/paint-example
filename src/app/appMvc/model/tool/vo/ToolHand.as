@@ -19,10 +19,10 @@ public class ToolHand extends Tool {
         state.cleanupState();
         switch (stateName) {
             case StateNone.NAME:
-                _state = new StateNone(this);
+                state = new StateNone(this);
                 break;
             case StateDrawing.NAME:
-                _state = new StateDrawing(this);
+                state = new StateDrawing(this);
                 break;
         }
         state.initState();

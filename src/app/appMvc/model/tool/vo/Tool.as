@@ -11,33 +11,41 @@ import app.appMvc.model.document.vo.Layer;
 import flash.events.MouseEvent;
 
 /**
- * Tool has static commonSettings and regular settings
+ * static commonSettings and regular settings
  */
-
 public class Tool {
     private var _toolName:String;
     function Tool(toolName:String) {
         _toolName = toolName;
-        _state = new ToolState(ToolState.NAME,this);
+        _state = new ToolState(ToolState.NAME, this);
     }
 
     private var _isInUse:Boolean = false;
 
-    protected var _state:ToolState;
+    private var _state:ToolState;
 
     private static var _activeLayer:Layer = null;
     // document origin coordinates on stage
     private static var _docOx:Number = 0.0;
     private static var _docOy:Number = 0.0;
-    // relative document mouse coordinates
 
+    // relative document mouse coordinates
     private static var _relX:Number = 0.0;
     private static var _relY:Number = 0.0;
 
     public function initTool():void {}
     public function cleanupTool():void {}
 
-    public final function get state():ToolState{return _state;}
+    public final function get state():ToolState {return _state;}
+    public final function set state(toolState:ToolState):void {
+        if (toolState.name == _state.name) {
+            return;
+        }
+        _state.cleanupState();
+        _state = toolState;
+        _state.initState();
+    }
+
     public function setState(stateName:String):void {}
 
     public final function get name():String {return _toolName;}
